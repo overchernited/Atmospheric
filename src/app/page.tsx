@@ -102,7 +102,7 @@ const LandingPage = () => {
                     <MemberCard name="Marlon Hernández" role="Full Stack Developer / Composer" description="Lead Developer of Atmospheric, responsible for Backend and Frontend development, API integrations, communications, and musical composition." quote="Coding at day, rocking at night." image="/images/marlon.jpg" />
                     <MemberCard name="Joham Gonzalez" role="Problem Statement Specialist/ Composer" description="Responsible for project documentation, conducting surveys, and contributing to musical composition." image="/images/joham.jpg" quote="Strumming strings and living dreams." />
                     <MemberCard name="Ivan Sierra" role="Research Analyst" description="In charge of project documentation, survey development, and traffic report analysis." quote="A good coffe and ready to go." image="/images/sierra.jpg" />
-                    <MemberCard name="Dylan Fagua" role="Theoretical Lead" description="Responsible for developing the project hypothesis and contributing to project documentation." image="/images/Fagua.jpg" quote="Dancing in the dark." />
+                    <MemberCard name="Dylan Fagua" role="Theoretical Lead" description="Responsible for developing the project hypothesis and contributing to project documentation." image="/images/fagua.jpg" quote="Dancing in the dark." />
                 </section>
             </section>
 
