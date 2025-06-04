@@ -5,6 +5,8 @@ import Link from 'next/link'
 import MemberCard from "@/components/Landing/MemberCard";
 import Image from "next/image";
 import ecolabs from "../app/assets/Branding/bybrand.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFigma, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 
 
@@ -129,8 +131,8 @@ const LandingPage = () => {
                         <div>
                             <Link href="/home" className="btn positive p-2 softhover">GO ATMOSPHERIC</Link>
                             <Link href="/" className="btn positive p-2 softhover">GO LANDING PAGE</Link>
-                            <Link href="/auth/login" className="btn positive p-2 softhover">LOGIN</Link>
-                            <Link href="/auth/signup" className="btn positive p-2 softhover">SIGN UP</Link>
+                            <Link href="https://github.com/overchernited/Atmospheric" className="btn positive p-2 softhover"><FontAwesomeIcon icon={faGithub} className="text-3xl" /></Link>
+                            <Link href="https://www.figma.com/design/i6BgqAyiOW1S6cEedaNgY2/Atmospheric-Mockups?m=auto&t=HdVv0UszuKHzyP8P-1" className="btn positive p-2 softhover"><FontAwesomeIcon icon={faFigma} className="text-3xl" /></Link>
                         </div>
                     </div>
                 </div>
