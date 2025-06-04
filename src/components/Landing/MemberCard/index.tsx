@@ -22,7 +22,7 @@ const MemberCard = (props: MemberCardProps) => {
             </div>
             <Image src={props.image} alt="Logo" className="rounded-xl m-auto object-cover aspect-square" width={300} height={300} loading="lazy" />
             <p className="p-5 mt-5 text-white font-normal text-lg opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-100 text-center">{props.description}</p>
-            <p className="absolute left-1/2 -translate-x-1/2 w-full bottom-0 mb-5 italic text-white font-light text-lg lg:opacity-0 md:group-hover:opacity-100 transition-opacity duration-100 text-center">"{props.quote}"</p>
+            <p className="absolute left-1/2 -translate-x-1/2 w-full bottom-0 mb-5 italic text-white font-light text-lg  md:group-hover:opacity-100 transition-opacity duration-100 text-center">"{props.quote}"</p>
         </motion.div>
     )
 }
