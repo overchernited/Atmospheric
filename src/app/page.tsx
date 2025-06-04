@@ -4,7 +4,6 @@ import LogoHeader from "@/components/Landing/Header";
 import Link from 'next/link'
 import MemberCard from "@/components/Landing/MemberCard";
 import Image from "next/image";
-import ecolabs from "../app/assets/Branding/bybrand.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFigma, faGithub } from "@fortawesome/free-brands-svg-icons";
 
@@ -126,7 +125,6 @@ const LandingPage = () => {
                     <div className="flex flex-col-reverse md:flex-row items-center justify-center md:justify-between w-full md:w-[99%]">
                         <div>
                             <Image src={logo} alt="Logo" width={500} height={500} />
-                            <Image src={ecolabs} alt="Logo" width={200} height={200} />
                         </div>
                         <div>
                             <Link href="/home" className="btn positive p-2 softhover">GO ATMOSPHERIC</Link>
