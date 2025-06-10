@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+body {
+  overflow-x: hidden;
+  background-color: #141414;
+}
+
+.btn {
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 8px;
+}
+
+.vibration {
+  transition: all 0.2s;
+}
+
+.hardhover:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  letter-spacing: 18px;
+}
+
+.softhover:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.blurry {
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  font-weight: bold;
+  color: white;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.075);
+  box-shadow: 0 0 10px #00000067;
+}
+
+.blurry.active {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: white;
+  text-decoration-thickness: 4px;
+}
+
+.positive {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 2.5px solid #7e4db2;
+  color: #7e4db2;
+  background-color: #141414;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.positive:hover {
+  /* background-color: #7e4db2;
+  color: #141414; */
+  box-shadow: 1px 1px 20px #7d47b6;
+}
+
+.negative {
+  border-radius: 8px;
+  color: #141414;
+  background-color: #7e4db2;
+  font-weight: bold;
+  border: 2px solid transparent;
+}
+
+.negative:hover {
+  box-shadow: 1px 1px 20px #1414148f;
+}
