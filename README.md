@@ -1,76 +1,88 @@
-🌌 Atmospheric
-Atmospheric is a full-stack web application built with React on the frontend and Node.js with Express on the backend, delivering an interactive and dynamic user experience.
+# 🌌 Atmospheric
 
-🛠️ Technologies
-Frontend: React ⚛️, TypeScript 📝, CSS Modules 🎨
+Atmospheric is a full-stack web application built with React on the frontend and Node.js with Express on the backend. It uses PostgreSQL as its database and is designed to be fast, secure, and easy to develop.
 
-Backend: Node.js 🟢, Express 🚂, TypeScript 📝
+---
 
-Database: PostgreSQL 🐘 (pg client)
+## 🛠️ Technologies Used
 
-Environment: dotenv 🌱
+- **Frontend:** React ⚛️, TypeScript 📝, CSS Modules 🎨  
+- **Backend:** Node.js 🟢, Express 🚂, TypeScript 📝  
+- **Database:** PostgreSQL 🐘  
+- **Environment:** dotenv 🌱  
+- **Development:** ts-node-dev 🔄 for hot-reloading backend  
 
-Development: ts-node-dev 🔄 (hot-reloading backend)
+---
 
-✨ Features
-Modern and responsive UI with React ⚛️
+## 🚀 Getting Started
 
-REST API backend for data management 🔌
+### Prerequisites
 
-Secure PostgreSQL connection with SSL 🔒
+- Node.js (v16 or higher recommended)  
+- PostgreSQL database (can be remote)  
+- pnpm or npm package manager  
 
-Environment variables for flexible configuration 🔧
+### Installation
 
-Fast development with TypeScript and auto-reload ⚡
+1. Clone this repository:
 
-🚀 Installation
-Clone the repo:
+    ```bash
+    git clone https://github.com/overchernited/Atmospheric.git
+    cd Atmospheric
+    ```
 
-bash
-Copiar código
-git clone https://github.com/overchernited/Atmospheric.git
-cd Atmospheric
-Install backend dependencies:
+2. Install backend dependencies:
 
-bash
-Copiar código
-cd Server
-pnpm install
-Configure environment variables in .env (inside Server):
+    ```bash
+    cd Server
+    pnpm install
+    ```
 
-env
-Copiar código
-PORT=3000
-PGHOST=interchange.proxy.rlwy.net
-PGUSER=postgres
-PGPASSWORD=your_password
-PGDATABASE=railway
-PGPORT=50250
-Start the backend server:
+3. Set up your `.env` file inside the `Server` folder with your database credentials:
 
-bash
-Copiar código
-pnpx ts-node-dev src/index.ts
-Install frontend dependencies:
+    ```env
+    PORT=3000
+    PGHOST=interchange.proxy.rlwy.net
+    PGUSER=postgres
+    PGPASSWORD=your_password_here
+    PGDATABASE=railway
+    PGPORT=50250
+    ```
 
-bash
-Copiar código
-cd ../Frontend
-pnpm install
-Start the frontend:
+4. Start the backend server:
 
-bash
-Copiar código
-pnpm start
-🌐 Usage
-Access frontend at: http://localhost:3000 🌍
+    ```bash
+    pnpx ts-node-dev src/index.ts
+    ```
 
-Backend runs at: http://localhost:3000 (configurable) 🖥️
+5. Open a new terminal, install frontend dependencies, and start the frontend:
 
-Root backend route / returns current DB time ⏰
+    ```bash
+    cd ../Frontend
+    pnpm install
+    pnpm start
+    ```
 
-🤝 Contributing
-Contributions are welcome! Open issues or PRs to help improve the project. 💪✨
+---
 
-📄 License
-MIT License © 2025
+## 🌐 Usage
+
+- Frontend runs at: `http://localhost:3000`  
+- Backend API runs at: `http://localhost:3000` (configurable via `.env`)  
+- The root backend route `/` responds with the current database time 🕒  
+
+---
+
+## 🤝 Contributing
+
+Contributions are very welcome! Feel free to open issues or submit pull requests to improve this project. 🙌✨
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License © 2025
+
+---
+
+Made with ❤️ by Overchernited
