@@ -99,7 +99,7 @@ const PageTitle = () => {
                     />
                 ) : (
                     title ? (
-                        <p>{title}</p>
+                        <p className="text-center">{title}</p>
                     ) : (
                         <Skeleton width={500} height={50} baseColor="#2b2f6e"        // gris oscuro
                             highlightColor="#734382" />

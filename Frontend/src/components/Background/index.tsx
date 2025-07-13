@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { StaticImageData } from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from 'next/navigation';
 
 interface Analytics {
     temp: number;
@@ -24,6 +25,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
     const [bgPosition, setBgPosition] = useState({ x: 10, y: 0 });
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [bgImage, setBgImage] = useState<StaticImageData>(defaultBg);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -42,6 +44,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
 
 
     useEffect(() => {
+        if (pathname !== '/forecast') return;
         (async () => {
             try {
                 const pos = await new Promise<GeolocationPosition>((res, rej) =>
@@ -113,7 +116,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
                     transition={{ duration: 0.8, ease: "easeInOut" }}
                     key={bgImage?.src}
                     ref={containerRef}
-                    className={`w-full h-full transition-all duration-300 background-cover ease-out absolute top-0 z-[-2] ${bgImage === defaultBg ? "blur-3xl" : ""}`}
+                    className={`w-full h-full transition-all duration-300 background-cover ease-out absolute top-0 z-[-2] ${bgImage === defaultBg && pathname == "/forecast" ? "blur-3xl" : ""}`}
                     style={{
                         backgroundImage: `url(${bgImage?.src})`,
                         backgroundPosition: `${bgPosition.x}px ${bgPosition.y}px`,
