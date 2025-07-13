@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
-import TopWave from "@/components/Waves";
+import PageTitle from "@/components/PageTitle";
 import Navbar from "@/components/Navbar";
 import LayoutClientWrapper from "../components/LayoutClientWrapper";
 import PagWrapper from "@/components/PagWrapper";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

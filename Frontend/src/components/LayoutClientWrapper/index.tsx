@@ -4,7 +4,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
-import TopWave from "@/components/Waves";
+import PageTitle from "@/components/PageTitle";
 
 export default function LayoutClientWrapper() {
     const pathname = usePathname();
@@ -20,7 +20,7 @@ export default function LayoutClientWrapper() {
     return (
         <>
             <Navbar />
-            <TopWave />
+            <PageTitle />
         </>
     );
 }
