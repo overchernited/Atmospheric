@@ -1,10 +1,18 @@
-const FullForecast = () => {
+import PageBackground from "@/components/Background"
+import LayoutClientWrapper from "@/components/LayoutClientWrapper"
+import WeatherAnalytics from "./Components/WeatherAnalytics"
+
+const Forecast = () => {
     return (
         <>
-            <h1>FullForecast</h1>
+
+            <PageBackground>
+                <WeatherAnalytics />
+            </PageBackground>
+
         </>
     )
 }
 
 
-export default FullForecast
+export default Forecast
