@@ -1,10 +1,10 @@
-import PageLayout from "../../components/Layout"
+import PageBackground from "../../components/Background"
 
 const About = () => {
     return (
-        <PageLayout>
+        <PageBackground>
             <p>xd</p>
-        </PageLayout>
+        </PageBackground>
     )
 }
 
