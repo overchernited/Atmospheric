@@ -1,13 +1,13 @@
-import DownloadButton from "@/app/home/Landing/DownloadButton";
-import logo from "../app/assets/Branding/negativebrand.png"
-import LogoHeader from "@/app/home/Landing/Header";
+import DownloadButton from "@/app/home/Components/DownloadButton";
+import logo from "../../public/branding/whitebrand.png"
+import LogoHeader from "@/app/home/Components/Header";
 import Link from 'next/link'
-import MemberCard from "@/app/home/Landing/MemberCard";
+import MemberCard from "@/app/home/Components/MemberCard";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFigma, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faCloud } from "@fortawesome/free-solid-svg-icons";
-import  bybrand from "@/app/assets/Branding/ByEcoPositive.png";
+import { faCloud, faFile } from "@fortawesome/free-solid-svg-icons";
+import bybrand from "../../public/branding/ByEcoPositive.png";
 
 
 
@@ -33,8 +33,12 @@ const LandingPage = () => {
                     <DownloadButton />
                 </div>
                 <p className="text-white font-medium text-xl">or use our website</p>
-                <Link href="/home" className=" positive p-4 vibration softhover">Go Atmospheric
-                </Link>
+                <div className="flex flex-row gap-30 items-center justify-center">
+                    <Link href="/home" className=" positive p-4 vibration softhover">Atmospheric
+                    </Link>
+                    <Link href="/forecast" className=" positive p-4 vibration softhover">Forecast Demo
+                    </Link>
+                </div>
             </section>
 
             <section id="features" className="bg-[#7e4db2] mt-5">
@@ -101,7 +105,7 @@ const LandingPage = () => {
 
             <section id="team">
                 <div className="text-white font-bold text-3xl text-center my-3 md:m-4">ECOLABS <FontAwesomeIcon icon={faCloud} /> Team</div>
-                <section className="flex flex-row items-center justify-center text-2xl text-white font-bold h-full w-full gap-12 flex-wrap">
+                <section className="p-4 flex flex-row items-center justify-center text-2xl text-white font-bold h-full w-full gap-12 flex-wrap">
                     <MemberCard name="Marlon Hernández" role="Full Stack Developer / Composer" description="Lead Developer of Atmospheric, responsible for Backend and Frontend development, API integrations, communications, and musical composition." quote="Coding at day, rocking at night." image="/images/marlon.jpg" />
                     <MemberCard name="Joham Gonzalez" role="Problem Statement Specialist/ Composer" description="Responsible for project documentation, conducting surveys, and contributing to musical composition." image="/images/joham.jpg" quote="Strumming strings and living dreams." />
                     <MemberCard name="Ivan Sierra" role="Research Analyst" description="In charge of project documentation, survey development, and traffic report analysis." quote="A good coffe and ready to go." image="/images/sierra.jpg" />
@@ -129,14 +133,19 @@ const LandingPage = () => {
                     <div className="flex flex-col-reverse md:flex-row items-center justify-center md:justify-between w-full md:w-[99%]">
                         <div className="flex flex-col items-center gap-2">
                             <Image src={logo} alt="AtmosphericLogo" width={500} height={500} loading="lazy" />
-                            <Image src={bybrand} alt="EcoLabs Logo" width={200} height={200} loading="lazy"/>
+                            <Image src={bybrand} alt="EcoLabs Logo" width={200} height={200} loading="lazy" />
                             <p className="text-white font-light text-sm">© 2025 Marlon Hernández All rights reserved</p>
                         </div>
                         <div className="mb-5">
                             <Link href="/home" className="btn positive p-2 softhover">GO ATMOSPHERIC</Link>
                             <Link href="/" className="btn positive p-2 softhover">TAKE ME UP</Link>
-                            <Link href="https://github.com/overchernited/Atmospheric" className="btn positive p-2 softhover"><FontAwesomeIcon icon={faGithub} className="text-3xl" /></Link>
-                            <Link href="https://www.figma.com/design/i6BgqAyiOW1S6cEedaNgY2/Atmospheric-Mockups?m=auto&t=HdVv0UszuKHzyP8P-1" className="btn positive p-2 softhover"><FontAwesomeIcon icon={faFigma} className="text-3xl" /></Link>
+
+                            <p className="text-white font-bold text-xl m-5 flex border-b-white border-b-2"> Learn more about Atmospheric!</p>
+                            <div className="flex flex-row gap-2 items-center justify-center">
+                                <Link href="https://github.com/overchernited/Atmospheric" className="btn positive p-2 softhover"><FontAwesomeIcon icon={faGithub} className="text-3xl" /></Link>
+                                <Link href="https://www.figma.com/design/i6BgqAyiOW1S6cEedaNgY2/Atmospheric-Mockups?m=auto&t=HdVv0UszuKHzyP8P-1" className="btn positive p-2 softhover"><FontAwesomeIcon icon={faFigma} className="text-3xl" /></Link>
+                                <Link href="https://docs.google.com/document/d/19QsUKvJKAnyK7J41cFzguVvVUYRCyTXpCz0mb-_hy84/edit?usp=sharing" className="btn positive p-2 softhover"><FontAwesomeIcon icon={faFile} className="text-3xl" /></Link>
+                            </div>
                         </div>
                     </div>
                 </footer>
