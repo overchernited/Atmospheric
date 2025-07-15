@@ -1,4 +1,4 @@
-import PageBackground from "@/components/Background"
+import PageBackground from "@/hooks/Background"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"

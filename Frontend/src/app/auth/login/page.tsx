@@ -1,4 +1,4 @@
-import PageBackground from "@/components/Background"
+import PageBackground from "@/hooks/Background"
 import LoginForm from "./Components/form"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
