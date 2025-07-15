@@ -89,7 +89,7 @@ const PageTitle = () => {
                 </svg>
             </div>
 
-            <div className="absolute top-1/3 flex h-full w-full justify-center text-3xl lg:text-5xl font-bold tracking-[30px] text-white md:translate-x-3">
+            <div className="absolute top-1/3 flex h-full w-full justify-center text-3xl lg:text-5xl font-bold tracking-[10px] text-white md:translate-x-3">
                 {isHome ? (
                     <Image
                         src={AccentLogo}
