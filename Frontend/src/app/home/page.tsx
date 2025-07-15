@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Btn from "../../components/Btn"
-import PageBackground from "../../components/Background"
+import PageBackground from "../../hooks/Background"
 import PageTitle from "../../components/PageTitle"
 import bybrand from "../assets/Branding/bybrand.png"
 import Image from 'next/image';
@@ -16,9 +16,9 @@ const Home = () => {
     return (
         <>
             <PageBackground>
-                <div className="flex flex-col justify-center items-center text-2xl h-full pt-5">
-                    <div className="p-5 backdrop-blur-xl w-[95%] xl:w-[50vw] xl:h-[38%] 2xl:h-[28%] rounded-xl shadow-zinc-800 shadow-2xl text-2xl">
-                        <div className="flex flex-row justify-start items-center gap-4 text-4xl text-white my-3">
+                <div className="flex flex-col h-[50vh] justify-center items-center text-2xl pt-5">
+                    <div className="p-5 backdrop-blur-xl w-[95%] xl:w-[50vw] rounded-xl shadow-zinc-800 shadow-2xl text-2xl">
+                        <div className="flex flex-row justify-start items-center gap-4 text-4xl text-white">
                             <Link href="/" className="btn hardhover"><FontAwesomeIcon icon={faArrowLeft} /></Link>
                             <p className="font-bold text-left">Authentication</p>
                         </div>
@@ -28,8 +28,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-
-            </PageBackground >
+            </PageBackground>
         </>
     )
 

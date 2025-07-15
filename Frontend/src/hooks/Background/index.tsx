@@ -23,6 +23,8 @@ interface Analytics {
 export default function PageBackground({ children }: { children: ReactNode }) {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [bgPosition, setBgPosition] = useState({ x: 10, y: 0 });
+    const [conditions, setConditions] = useState<String>("clear");
+
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [bgImage, setBgImage] = useState<StaticImageData>(defaultBg);
     const pathname = usePathname();
@@ -64,9 +66,12 @@ export default function PageBackground({ children }: { children: ReactNode }) {
                 const data: Analytics = await res.json(); // tu objeto
                 const cond = data.conditions.toLowerCase();
 
+                setConditions(cond);
+
                 if (cond.includes("rain")) setBgImage(rainBg);
                 else if (cond.includes("cloud")) setBgImage(cloudyBg);
                 else if (cond.includes("sun")) setBgImage(sunnyBg);
+                else if (cond.includes("clear")) setBgImage(defaultBg);
                 else setBgImage(defaultBg);
             } catch {
                 setBgImage(defaultBg);            // fallback
@@ -116,7 +121,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
                     transition={{ duration: 0.8, ease: "easeInOut" }}
                     key={bgImage?.src}
                     ref={containerRef}
-                    className={`w-full h-full transition-all duration-300 background-cover ease-out absolute top-0 z-[-2] ${bgImage === defaultBg && pathname == "/forecast" ? "blur-3xl" : ""}`}
+                    className={`w-full min-h-full transition-all duration-300 background-cover ease-out fixed top-0 z-[-2] ${bgImage === defaultBg && conditions !== "clear" && pathname == "/forecast" ? "blur-3xl" : ""}`}
                     style={{
                         backgroundImage: `url(${bgImage?.src})`,
                         backgroundPosition: `${bgPosition.x}px ${bgPosition.y}px`,
@@ -127,9 +132,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
                 >
                 </motion.div>
             </AnimatePresence>
-            <div className="relative z-0 h-full">
-                {children}
-            </div>
+            {children}
         </>
     );
 }

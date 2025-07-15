@@ -49,7 +49,7 @@ const NavButton = (props: NavButtonProps) => {
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 5 }}
-                        className="absolute top-7 md:top-8 left-1/2 -translate-x-1/2 font-bold text-white bg-[#7e4db2] p-1 rounded-lg md:text-sm text-xs"
+                        className="absolute top-7 md:top-8 left-1/2 -translate-x-1/2 font-bold text-white bg-gradient-to-br from-[#4c3561] to-[#1b1b1b] p-1 rounded-lg md:text-sm text-xs"
                     >
                         {props.children}
                     </motion.div>

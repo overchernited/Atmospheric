@@ -73,8 +73,8 @@ const PageTitle = () => {
     const title = isForecast ? city : defaultTitle;
 
     return (
-        <div className="absolute top-0 h-[30%] w-full overflow-hidden">
-            {/* Fondo ondulado */}
+        <div className="relative top-[-0] h-[30%] w-full overflow-hidden">
+
             <div className="h-full w-full transform rotate-180 md:-translate-x-36 xl:translate-x-20">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
