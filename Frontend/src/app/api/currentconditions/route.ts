@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { toZonedTime, format } from 'date-fns-tz';
+import { format } from 'date-fns-tz';
 
 const API_KEY = process.env.WEATHER_API_KEY!;
 const BASE =
@@ -7,7 +7,7 @@ const BASE =
 
 export async function GET(req: NextRequest) {
     const loc = req.nextUrl.searchParams.get('loc');
-    const tz = req.nextUrl.searchParams.get('tz') || 'UTC'; // zona horaria, por defecto UTC
+    const tz = req.nextUrl.searchParams.get('tz') || 'UTC'; // Ejemplo: 'America/Bogota'
 
     if (!loc)
         return NextResponse.json({ error: 'loc param required' }, { status: 400 });
@@ -26,14 +26,13 @@ export async function GET(req: NextRequest) {
 
     const json = await res.json();
 
-    // Obtener la hora actual ajustada a la zona horaria del cliente
+    // ✅ Obtener la hora local en la zona horaria indicada
     const now = new Date();
-    const clientTime = toZonedTime(now, tz);
-    const currentHourNumber = parseInt(format(clientTime, 'H', { timeZone: tz }), 10);
+    const currentHourNumber = parseInt(format(now, 'H', { timeZone: tz }), 10);
 
     const hoursArray: any[] = json.days?.[0]?.hours ?? [];
 
-    // Buscar la hora que coincida con la hora actual en la zona horaria del cliente
+    // 🕒 Buscar coincidencia por hora
     const currentHour =
         hoursArray.find((h) => Number(h.datetime.split(':')[0]) === currentHourNumber) ??
         hoursArray[0];
