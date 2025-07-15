@@ -42,10 +42,10 @@ const HourlyWeatherAnalytics = () => {
 
     const getAnalytics = async (lat: string, lon: string) => {
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const date = new Date().toISOString()
+        const currentHour = new Date().getHours();
 
         const res = await fetch(
-            `/api/hourlyconditions?loc=${lat},${lon}&tz=${encodeURIComponent(timezone)}&currentTime=${date}`,
+            `/api/hourlyconditions?loc=${lat},${lon}&currentHour=${currentHour}`,
             { cache: "no-store" }
         );
         if (!res.ok) throw new Error("weather error");
