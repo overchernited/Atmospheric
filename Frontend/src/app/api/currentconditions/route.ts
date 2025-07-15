@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { format, toZonedTime } from 'date-fns-tz';
+import { format, toZonedTime, fromZonedTime } from 'date-fns-tz';
 
 const API_KEY = process.env.WEATHER_API_KEY!;
-const BASE = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
+const BASE =
+    'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
 export async function GET(req: NextRequest) {
     const loc = req.nextUrl.searchParams.get('loc');
-    const tz = req.nextUrl.searchParams.get('tz') || 'UTC'; // zona horaria del usuario
+    const userTz = req.nextUrl.searchParams.get('tz') || 'UTC'; // zona del navegador
 
     if (!loc)
         return NextResponse.json({ error: 'loc param required' }, { status: 400 });
@@ -24,27 +25,30 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: 'Visual Crossing error' }, { status: 502 });
 
     const json = await res.json();
+    const placeTz = json.timezone as string;           // ← zona del lugar
 
+    /* hora actual del usuario */
     const now = new Date();
-    const userHour = parseInt(format(now, 'H', { timeZone: tz }), 10); // hora del usuario (0–23)
+    const userHour = parseInt(format(now, 'H', { timeZone: userTz }), 10);
 
+    /* convierte cada hora del lugar a la zona del usuario */
     const hoursArray: any[] = json.days?.[0]?.hours ?? [];
-
-    // Convertir cada hora del pronóstico a la zona horaria del usuario
     const convertedHours = hoursArray.map((h) => {
-        const fullISO = `${json.days[0].datetime}T${h.datetime}`;
-        const userDate = toZonedTime(new Date(fullISO), tz);
-        const userHourConverted = parseInt(format(userDate, 'H', { timeZone: tz }), 10);
+        const isoLocal = `${json.days[0].datetime}T${h.datetime}`;   // hora local del lugar
+        const utcDate = fromZonedTime(isoLocal, placeTz);          // 1) local → UTC
+        const userDate = toZonedTime(utcDate, userTz);            // 2) UTC   → zona usuario
+        const userHourConverted = parseInt(format(userDate, 'H', { timeZone: userTz }), 10);
         return { ...h, userHourConverted };
     });
 
-    // Buscar coincidencia
     const currentHour =
-        convertedHours.find((h) => h.userHourConverted === userHour) ?? convertedHours[0];
+        convertedHours.find((h) => h.userHourConverted === userHour) ??
+        convertedHours[0];
 
     if (!currentHour)
         return NextResponse.json({ error: 'No hourly data' }, { status: 500 });
 
+    /* respuesta */
     const current = {
         datetime: `${json.days[0].datetime} ${currentHour.datetime}`,
         temp: currentHour.temp,
