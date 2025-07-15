@@ -2,6 +2,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core"
 import { faCloudsmith, faSoundcloud } from "@fortawesome/free-brands-svg-icons"
 import { faCloud, faSun, faCloudRain, faCloudSun } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { motion } from "framer-motion"
 
 
 
@@ -41,10 +42,13 @@ const WeatherCard = (props: WeatherCard) => {
 
     const icon = getIcon(props.conditions);
 
-    
+
 
     return (
-        <div className="flex flex-col items-center justify-center w-[100%] lg:w-auto ">
+        <motion.div
+            whileHover={{ scale: 1.1, boxShadow: '0px 1px 100px #5f35697f', zIndex: 100 }}
+
+            className="flex flex-col items-center justify-center w-[100%] lg:w-auto ">
             <div className=" relative backdrop-blur-3xl bg-white/5 h-[35vh] w-full xl:w-[10rem] rounded-lg overflow-hidden shrink-0 text-center p-5 text-white">
                 <h1 className="font-bold text-4xl">{props.hour}</h1>
                 <section className="flex flex-col my-4 text-xl items-center justify-center">
@@ -61,7 +65,7 @@ const WeatherCard = (props: WeatherCard) => {
                 </section>
             </div>
             <p className="text-center text-white fond-medium">{props.date}</p>
-        </div>
+        </motion.div>
     )
 }
 
