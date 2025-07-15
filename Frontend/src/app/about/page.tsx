@@ -1,4 +1,4 @@
-import PageBackground from "../../components/Background"
+import PageBackground from "../../hooks/Background"
 
 const About = () => {
     return (
