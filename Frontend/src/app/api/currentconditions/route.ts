@@ -14,11 +14,8 @@ export async function GET(req: NextRequest) {
 
     if (currentHourParam) {
         currentHourNumber = parseInt(currentHourParam, 10);
-        if (isNaN(currentHourNumber) || currentHourNumber < 0 || currentHourNumber > 23) {
-            return NextResponse.json({ error: 'Invalid currentHour param' }, { status: 400 });
-        }
     } else {
-        // Si no se pasa, se usa la hora UTC del servidor (o local)
+        console.log("bip!")
         currentHourNumber = new Date().getHours();
     }
 
@@ -46,6 +43,8 @@ export async function GET(req: NextRequest) {
     if (!currentHour) {
         currentHour = hoursArray[0];
     }
+
+    console.log(currentHourNumber);
 
     return NextResponse.json({
         datetime: `${json.days[0].datetime} ${currentHour.datetime}`,

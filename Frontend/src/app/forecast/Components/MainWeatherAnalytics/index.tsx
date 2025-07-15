@@ -87,7 +87,7 @@ const MainWeatherAnalytics = () => {
 
 
         const res = await fetch(
-            `/api/currentconditions?loc=${lat},${lon}&tz=${encodeURIComponent(timezone)}`,
+            `/api/currentconditions?loc=${lat},${lon}&currentHour=${new Date().getHours()}`,
             { cache: "no-store" }
         );
         if (!res.ok) throw new Error("weather error");
