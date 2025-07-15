@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { toZonedTime, format } from 'date-fns-tz';
+import { toZonedTime, format, fromZonedTime } from 'date-fns-tz';
 
 const API_KEY = process.env.WEATHER_API_KEY!;
 const BASE = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
@@ -7,9 +7,27 @@ const BASE = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/
 export async function GET(req: NextRequest) {
     const loc = req.nextUrl.searchParams.get('loc');
     const userTz = req.nextUrl.searchParams.get('tz') || 'UTC';
+    const currentTimeParam = req.nextUrl.searchParams.get('currentTime'); // ISO string opcional
 
     if (!loc)
         return NextResponse.json({ error: 'loc param required' }, { status: 400 });
+
+    // Parsear la hora actual recibida o usar ahora mismo
+    let currentTime: Date;
+    if (currentTimeParam) {
+        currentTime = new Date(currentTimeParam);
+        if (isNaN(currentTime.getTime())) {
+            return NextResponse.json({ error: 'Invalid currentTime param' }, { status: 400 });
+        }
+    } else {
+        currentTime = new Date();
+    }
+
+    // Convertir currentTime a la zona horaria del usuario (userTz)
+    // Si currentTime ya viene con zona horaria, este ajuste la adapta a userTz
+    const clientTime = toZonedTime(currentTime, userTz);
+
+    const currentHourNumber = parseInt(format(clientTime, 'H', { timeZone: userTz }), 10);
 
     const url = `${BASE}/${encodeURIComponent(loc)}/today` +
         `?unitGroup=metric` +
@@ -24,15 +42,9 @@ export async function GET(req: NextRequest) {
 
     const json = await res.json();
 
-    const now = new Date();
-
-    // Convierte ahora a zona horaria del usuario
-    const clientTime = toZonedTime(now, userTz);
-    const currentHourNumber = parseInt(format(clientTime, 'H', { timeZone: userTz }), 10);
-
     const hoursArray: any[] = json.days?.[0]?.hours ?? [];
 
-    // Mapeamos horas y ajustamos el horario para comparar en la zona del usuario
+    // Ajustar cada hora del pronóstico a la zona horaria del usuario para comparar bien
     const adjustedHours = hoursArray.map((h) => {
         const iso = `${json.days[0].datetime}T${h.datetime}`;
         const dateInUserTZ = toZonedTime(new Date(iso), userTz);
@@ -59,5 +71,8 @@ export async function GET(req: NextRequest) {
         solarradiation: currentHour.solarradiation,
         feelslike: currentHour.feelslike,
         conditions: currentHour.conditions,
+        clientTime: clientTime.toISOString(),
+        userTz,
+        currentHourNumber,
     });
 }
