@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const API_KEY = process.env.WEATHER_API_KEY!;
-const BASE = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
+const BASE =
+    'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
 export async function GET(req: NextRequest) {
     const loc = req.nextUrl.searchParams.get('loc');
@@ -13,7 +14,7 @@ export async function GET(req: NextRequest) {
         `?unitGroup=metric` +
         `&include=hours` +
         `&contentType=json` +
-        `&elements=datetime,temp,humidity,windspeed,aqius,solarradiation,conditions` +
+        `&elements=datetime,temp,humidity,windspeed,aqius,solarradiation,conditions,feelslike` +
         `&key=${API_KEY}`;
 
     const res = await fetch(url, { next: { revalidate: 600 } });
@@ -21,16 +22,14 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: 'Visual Crossing error' }, { status: 502 });
 
     const json = await res.json();
-    const now = new Date();
 
-    // Buscar el registro horario más cercano al tiempo actual
-    const currentHour = json?.days?.[0]?.hours?.reduce((closest: any, hour: any) => {
-        const hourTime = new Date(`${json.days[0].datetime}T${hour.datetime}:00`);
-        const closestTime = new Date(`${json.days[0].datetime}T${closest.datetime}:00`);
-        return Math.abs(hourTime.getTime() - now.getTime()) < Math.abs(closestTime.getTime() - now.getTime())
-            ? hour
-            : closest;
-    });
+    const now = new Date();
+    const currentHourNumber = now.getHours();
+
+    const hoursArray: any[] = json.days?.[0]?.hours ?? [];
+    const currentHour =
+        hoursArray.find((h) => Number(h.datetime.split(':')[0]) === currentHourNumber) ??
+        hoursArray[0];
 
     if (!currentHour)
         return NextResponse.json({ error: 'No hourly data' }, { status: 500 });
@@ -42,8 +41,10 @@ export async function GET(req: NextRequest) {
         windspeed: currentHour.windspeed,
         aqius: currentHour.aqius,
         solarradiation: currentHour.solarradiation,
+        feelslike: currentHour.feelslike,
         conditions: currentHour.conditions,
     };
 
     return NextResponse.json(current);
 }
+ 
