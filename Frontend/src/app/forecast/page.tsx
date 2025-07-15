@@ -1,13 +1,14 @@
-import PageBackground from "@/components/Background"
-import LayoutClientWrapper from "@/components/LayoutClientWrapper"
-import WeatherAnalytics from "./Components/WeatherAnalytics"
+import PageBackground from "@/hooks/Background"
+import MainWeatherAnalytics from "./Components/MainWeatherAnalytics"
+import HourlyWeatherAnalytics from "./Components/HourlyWeatherAnalytics"
 
 const Forecast = () => {
     return (
         <>
 
             <PageBackground>
-                <WeatherAnalytics />
+                <MainWeatherAnalytics />
+                <HourlyWeatherAnalytics />
             </PageBackground>
 
         </>
