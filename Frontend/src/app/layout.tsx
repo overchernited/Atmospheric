@@ -4,8 +4,8 @@ import Head from "next/head"; // <-- importar Head aquí
 import "../styles/globals.css";
 import PageTitle from "@/components/PageTitle";
 import Navbar from "@/components/Navbar";
-import LayoutClientWrapper from "../components/LayoutClientWrapper";
-import PagWrapper from "@/components/PagWrapper";
+import LayoutClientWrapper from "../hooks/NotFoundWrapper";
+import PagWrapper from "@/hooks/AnimationWrapper";
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import background from "../app/assets/background.webp"
@@ -14,6 +14,7 @@ import bg1 from '../app/assets/background.webp';
 import bg2 from '../app/assets/raining.webp';
 import bg3 from '../app/assets/sunny.webp';
 import bg4 from '../app/assets/cloudy.webp';
+import ScrollToTop from "@/hooks/ScrollHook";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +50,7 @@ export default function RootLayout({
             <LayoutClientWrapper />
             {children}
           </PagWrapper>
+          <ScrollToTop />
         </body>
       </html>
     </>
