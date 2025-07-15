@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import WeatherBox from "../WeatherBox";
 import Skeleton from "react-loading-skeleton";
+import { faCloud, faCloudRain, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Coords {
     lat: string;
@@ -19,7 +22,49 @@ interface Analytics {
     conditions: string
 }
 
+
+const conditionIcons: Record<string, IconDefinition> = {
+    clear: faCloud,
+    partially: faCloudSun,
+    cloudy: faCloud,
+    sunny: faSun,
+    rain: faCloudRain,
+};
+
+const conditionPhrases: Record<string, string> = {
+    clear: "Go out and have a nice day",
+    partially: "Don't let clouds hide your smile!",
+    cloudy: "Weather is cloudy :(",
+    sunny: "Don't forget your sunglasses",
+    rain: "Don't forget your umbrella",
+};
+
 const MainWeatherAnalytics = () => {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+
+
+    function getIcon(condition: string): IconDefinition {
+        const lower = condition.toLowerCase();
+
+        for (const key in conditionIcons) {
+            if (lower.includes(key)) {
+                return conditionIcons[key];
+            }
+        }
+        // fallback si no hay coincidencia
+        return faCloud;
+    }
+
+    function getPhrase(condition: string) {
+        const condLower = condition.toLowerCase();
+
+        // Buscar key que esté contenida en la condición
+        const key = Object.keys(conditionPhrases).find(k => condLower.includes(k));
+
+        return key ? conditionPhrases[key] : "Clima desconocido";
+    }
+
     const [coords, setCoords] = useState<Coords>({ lat: "", lon: "" });
     const [analytics, setAnalytics] = useState<Analytics | null>(null);
 
@@ -39,7 +84,6 @@ const MainWeatherAnalytics = () => {
 
     const getAnalytics = async (lat: string, lon: string) => {
 
-        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
         const res = await fetch(
             `/api/currentconditions?loc=${lat},${lon}&tz=${encodeURIComponent(timezone)}`,
@@ -73,11 +117,27 @@ const MainWeatherAnalytics = () => {
         })();
     }, []);
 
+    const condition = analytics?.conditions ?? "";
+
+    const coordsNode = coords.lat ? (
+        <>
+            <div className="text-center">
+                <p className="text-base font-light">{coords.lat}, {coords.lon}</p>
+                <p className="text-sm font-extralight">UTC: {timezone}</p>
+            </div>
+        </>
+    ) : (
+        <Skeleton width={120} height={20} baseColor="#2b2f6e"        // gris oscuro
+            highlightColor="#734382" />
+    )
+
+
     const tempNode = analytics ? (
         <>
             <h1 className="text-6xl lg:text-8xl font-bold">
                 {Math.round(analytics.temp)}°C
                 <p className="text-base lg:text-base font-extralight text-center">feels like: {analytics.feelslike}°C</p>
+
             </h1>
         </>
     ) : (
@@ -86,8 +146,16 @@ const MainWeatherAnalytics = () => {
             enableAnimation={true} />
     );
 
+
+
     const conditionNode = analytics ? (
-        analytics.conditions.split(",")[0]
+        <>
+            <div className="tracking-[.2rem] lg:tracking-[.8rem] text-lg lg:text-2xl backdrop-blur-3x flex flex-row items-center justify-center bg-white/5 p-2 rounded-full">
+                <p>{analytics.conditions}</p>
+                <FontAwesomeIcon icon={getIcon(condition)} ></FontAwesomeIcon>
+            </div>
+            <p className="text-base lg:text-xs font-extralight text-center">{getPhrase(condition)}</p>
+        </>
     ) : (
         <Skeleton width={200} height={40} borderRadius={9999} baseColor="#2b2f6e"        // gris oscuro
             highlightColor="#734382"
@@ -122,20 +190,16 @@ const MainWeatherAnalytics = () => {
             enableAnimation={true} />
     );
 
+
     return (
         <div className="w-full h-[65vh] flex flex-col items-center justify-center text-white gap-4">
-            {coords.lat ? (
-                <p className="text-base font-light">{coords.lat}, {coords.lon}</p>
-            ) : (
-                <Skeleton width={120} height={20} baseColor="#2b2f6e"        // gris oscuro
-                    highlightColor="#734382" />
-            )}
+
+            {coordsNode}
 
             {tempNode}
 
-            <p className="tracking-[.2rem] lg:tracking-[.8rem] text-lg lg:text-2xl backdrop-blur-3xl text-center bg-white/5 p-2 rounded-full">
-                {conditionNode}
-            </p>
+            {conditionNode}
+
 
             <div className="flex gap-2 lg:gap-9 mt-4 items-center justify-center w-full">{boxesNode}</div>
 

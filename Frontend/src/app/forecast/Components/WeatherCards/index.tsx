@@ -41,6 +41,8 @@ const WeatherCard = (props: WeatherCard) => {
 
     const icon = getIcon(props.conditions);
 
+    
+
     return (
         <div className="flex flex-col items-center justify-center w-[100%] lg:w-auto ">
             <div className=" relative backdrop-blur-3xl bg-white/5 h-[35vh] w-full xl:w-[10rem] rounded-lg overflow-hidden shrink-0 text-center p-5 text-white">
