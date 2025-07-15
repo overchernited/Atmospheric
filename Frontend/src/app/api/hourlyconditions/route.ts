@@ -23,27 +23,35 @@ export async function GET(req: NextRequest) {
 
     const json = await res.json();
 
-
     const now = new Date();
-    const currentHourNumber = now.getHours();          // 0‑23
+
+    // Helper para rellenar con cero
     const pad = (n: number) => n.toString().padStart(2, '0');
-    const todayISO = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
 
+    // Fecha local YYYY-MM-DD para comparación
+    const todayISO = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(
+        now.getDate()
+    )}`;
 
+    const currentHourNumber = now.getHours(); // 0-23
+
+    // Construir lista plana de horas con fecha y hora
     const flatHours: any[] = json.days.flatMap((d: any) =>
         d.hours.map((h: any) => ({
             ...h,
-            fullDateTime: `${d.datetime}T${h.datetime}`,
+            fullDateTime: `${d.datetime}T${h.datetime}`, // fecha + hora local
             date: d.datetime,
             hourNum: parseInt(h.datetime.split(':')[0], 10),
-        })),
+        }))
     );
+
     let startIndex = flatHours.findIndex(
-        (h) => h.date === todayISO && h.hourNum === currentHourNumber,
+        (h) => h.date === todayISO && h.hourNum === currentHourNumber
     );
+
     if (startIndex === -1) {
         startIndex = flatHours.findIndex(
-            (h) => h.date === todayISO && h.hourNum > currentHourNumber,
+            (h) => h.date === todayISO && h.hourNum > currentHourNumber
         );
     }
 
@@ -56,9 +64,14 @@ export async function GET(req: NextRequest) {
         next4Hours.push(flatHours[(startIndex + i) % flatHours.length]);
     }
 
+    // Generar fecha-hora local tipo ISO sin convertir a UTC
+    const generatedAtLocal = `${todayISO}T${pad(now.getHours())}:${pad(
+        now.getMinutes()
+    )}:${pad(now.getSeconds())}`;
+
     return NextResponse.json({
         location: json.address,
-        generatedAt: now.toISOString(),
+        generatedAt: generatedAtLocal,
         next4Hours,
     });
 }
