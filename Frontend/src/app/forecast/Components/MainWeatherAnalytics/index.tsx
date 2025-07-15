@@ -170,7 +170,7 @@ const MainWeatherAnalytics = () => {
             <div className="mt-4 w-[100%] flex justify-center itens-center">
                 <WeatherBox title="UV">{analytics.solarradiation}</WeatherBox>
             </div>
-            <div className="flex items-center justify-center gap-2 w-[30%] text-center">
+            <div className="flex items-center justify-center gap-2 lg:w-[30%] text-center">
                 <FontAwesomeIcon size="1x" icon={faCircleInfo} className="text-4xl" />
                 <p className="text-xs font-extralight">This analytics was obtained from VisualCrossing.com at {analytics.datetime.split(" ")[1].split(":")[0]}:00 which may cause discrepancies with most up-to-date information.</p>
             </div>
