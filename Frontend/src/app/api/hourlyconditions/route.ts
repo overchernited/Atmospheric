@@ -1,4 +1,6 @@
+
 import { NextRequest, NextResponse } from 'next/server';
+import { toZonedTime, format } from 'date-fns-tz';
 
 const API_KEY = process.env.WEATHER_API_KEY!;
 const BASE =
@@ -6,6 +8,8 @@ const BASE =
 
 export async function GET(req: NextRequest) {
     const loc = req.nextUrl.searchParams.get('loc');
+    const tz = req.nextUrl.searchParams.get('tz') || 'UTC'; // lee zona horaria o usa UTC
+
     if (!loc)
         return NextResponse.json({ error: 'loc param required' }, { status: 400 });
 
@@ -25,21 +29,17 @@ export async function GET(req: NextRequest) {
 
     const now = new Date();
 
-    // Helper para rellenar con cero
-    const pad = (n: number) => n.toString().padStart(2, '0');
+    const clientTime = toZonedTime(now, tz);
 
-    // Fecha local YYYY-MM-DD para comparación
-    const todayISO = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(
-        now.getDate()
-    )}`;
+    const todayISO = format(clientTime, 'yyyy-MM-dd', { timeZone: tz });
 
-    const currentHourNumber = now.getHours(); // 0-23
+    const currentHourNumber = parseInt(format(clientTime, 'H', { timeZone: tz }), 10);
 
     // Construir lista plana de horas con fecha y hora
     const flatHours: any[] = json.days.flatMap((d: any) =>
         d.hours.map((h: any) => ({
             ...h,
-            fullDateTime: `${d.datetime}T${h.datetime}`, // fecha + hora local
+            fullDateTime: `${d.datetime}T${h.datetime}`,
             date: d.datetime,
             hourNum: parseInt(h.datetime.split(':')[0], 10),
         }))
@@ -64,10 +64,8 @@ export async function GET(req: NextRequest) {
         next4Hours.push(flatHours[(startIndex + i) % flatHours.length]);
     }
 
-    // Generar fecha-hora local tipo ISO sin convertir a UTC
-    const generatedAtLocal = `${todayISO}T${pad(now.getHours())}:${pad(
-        now.getMinutes()
-    )}:${pad(now.getSeconds())}`;
+    // Genera fecha-hora local tipo ISO (zona cliente)
+    const generatedAtLocal = format(clientTime, "yyyy-MM-dd'T'HH:mm:ss", { timeZone: tz });
 
     return NextResponse.json({
         location: json.address,

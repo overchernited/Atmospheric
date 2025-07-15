@@ -38,8 +38,11 @@ const MainWeatherAnalytics = () => {
     };
 
     const getAnalytics = async (lat: string, lon: string) => {
+
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
         const res = await fetch(
-            `/api/currentconditions?loc=${lat},${lon}`,
+            `/api/currentconditions?loc=${lat},${lon}&tz=${encodeURIComponent(timezone)}`,
             { cache: "no-store" }
         );
         if (!res.ok) throw new Error("weather error");
