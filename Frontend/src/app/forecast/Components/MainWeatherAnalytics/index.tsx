@@ -129,6 +129,9 @@ const MainWeatherAnalytics = () => {
             <Skeleton width={180} height={96} baseColor="#2b2f6e"        // gris oscuro
                 highlightColor="#734382"   // gris más claro para animación
                 enableAnimation={true} />
+            <Skeleton width={300} height={50} borderRadius={9999} baseColor="#2b2f6e"        // gris oscuro
+                highlightColor="#734382"
+                enableAnimation={true} />
 
             <div className="flex flex-row justify-center items-center gap-4 text-4xl text-white m-3">
 
@@ -160,6 +163,12 @@ const MainWeatherAnalytics = () => {
                 {Math.round(analytics.temp)}°C
                 <p className="text-base lg:text-base font-extralight text-center">feels like: {analytics.feelslike}°C</p>
             </h1>
+
+            <div className="tracking-[.2rem] lg:tracking-[.2rem] text-lg lg:text-2xl backdrop-blur-3x flex gap-3 flex-row items-center justify-center bg-white/5 p-2 rounded-full">
+                <p>{analytics.conditions}</p>
+                <FontAwesomeIcon icon={getIcon(condition)} ></FontAwesomeIcon>
+            </div>
+            <p className="text-base lg:text-xs font-extralight text-center">{getPhrase(condition)}</p>
 
             <div className="flex gap-2 lg:gap-9 mt-4 items-center justify-center w-full">
                 <WeatherBox title="ICA">{analytics.aqius}</WeatherBox>
