@@ -58,7 +58,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
                 const { latitude, longitude } = pos.coords;
 
                 const res = await fetch(
-                    `/api/currentconditions?loc=${latitude},${longitude}`,
+                    `/api/currentconditions?loc=${latitude},${longitude}&tz=${Intl.DateTimeFormat().resolvedOptions().timeZone}`,
                     { cache: "no-store" }
                 );
                 if (!res.ok) throw new Error("weather error");

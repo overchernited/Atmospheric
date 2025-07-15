@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { format } from 'date-fns-tz';
+import { format, toZonedTime } from 'date-fns-tz';
 
 const API_KEY = process.env.WEATHER_API_KEY!;
-const BASE =
-    'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
+const BASE = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
 export async function GET(req: NextRequest) {
     const loc = req.nextUrl.searchParams.get('loc');
-    const tz = req.nextUrl.searchParams.get('tz') || 'UTC'; // Ejemplo: 'America/Bogota'
+    const tz = req.nextUrl.searchParams.get('tz') || 'UTC'; // zona horaria del usuario
 
     if (!loc)
         return NextResponse.json({ error: 'loc param required' }, { status: 400 });
@@ -26,16 +25,22 @@ export async function GET(req: NextRequest) {
 
     const json = await res.json();
 
-    // ✅ Obtener la hora local en la zona horaria indicada
     const now = new Date();
-    const currentHourNumber = parseInt(format(now, 'H', { timeZone: tz }), 10);
+    const userHour = parseInt(format(now, 'H', { timeZone: tz }), 10); // hora del usuario (0–23)
 
     const hoursArray: any[] = json.days?.[0]?.hours ?? [];
 
-    // 🕒 Buscar coincidencia por hora
+    // Convertir cada hora del pronóstico a la zona horaria del usuario
+    const convertedHours = hoursArray.map((h) => {
+        const fullISO = `${json.days[0].datetime}T${h.datetime}`;
+        const userDate = toZonedTime(new Date(fullISO), tz);
+        const userHourConverted = parseInt(format(userDate, 'H', { timeZone: tz }), 10);
+        return { ...h, userHourConverted };
+    });
+
+    // Buscar coincidencia
     const currentHour =
-        hoursArray.find((h) => Number(h.datetime.split(':')[0]) === currentHourNumber) ??
-        hoursArray[0];
+        convertedHours.find((h) => h.userHourConverted === userHour) ?? convertedHours[0];
 
     if (!currentHour)
         return NextResponse.json({ error: 'No hourly data' }, { status: 500 });
