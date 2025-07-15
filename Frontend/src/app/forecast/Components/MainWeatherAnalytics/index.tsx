@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import WeatherBox from "../WeatherBox";
 import Skeleton from "react-loading-skeleton";
-import { faCloud, faCloudRain, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faCloud, faCloudRain, faCloudSun, faInfo, faSun } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -13,6 +13,7 @@ interface Coords {
 }
 
 interface Analytics {
+    datetime: string;
     temp: number;
     humidity: number;
     wind: number;
@@ -95,6 +96,7 @@ const MainWeatherAnalytics = () => {
         console.log(data)
 
         setAnalytics({
+            datetime: data.datetime,
             temp: data.temp,
             humidity: data.humidity,
             wind: data.windspeed,
@@ -119,91 +121,66 @@ const MainWeatherAnalytics = () => {
 
     const condition = analytics?.conditions ?? "";
 
-    const coordsNode = coords.lat ? (
+
+    const SkeletonNode = !analytics ? (
+        <>
+            <Skeleton width={120} height={20} baseColor="#2b2f6e"        // gris oscuro
+                highlightColor="#734382" />
+            <Skeleton width={180} height={96} baseColor="#2b2f6e"        // gris oscuro
+                highlightColor="#734382"   // gris más claro para animación
+                enableAnimation={true} />
+
+            <div className="flex flex-row justify-center items-center gap-4 text-4xl text-white m-3">
+
+                <Skeleton width={128} height={100} baseColor="#2b2f6e"        // gris oscuro
+                    highlightColor="#734382"   // gris más claro para animación
+                    enableAnimation={true} />
+                <Skeleton width={128} height={100} baseColor="#2b2f6e"        // gris oscuro
+                    highlightColor="#734382"   // gris más claro para animación
+                    enableAnimation={true} />
+                <Skeleton width={128} height={100} baseColor="#2b2f6e"        // gris oscuro
+                    highlightColor="#734382"   // gris más claro para animación
+                    enableAnimation={true} />
+            </div>
+            <Skeleton width={128} height={100} baseColor="#2b2f6e"
+                highlightColor="#734382"
+                enableAnimation={true} />
+            <Skeleton width={470} height={60} baseColor="#2b2f6e"
+                highlightColor="#734382"
+                enableAnimation={true} />
+        </>
+    ) : (
         <>
             <div className="text-center">
                 <p className="text-base font-light">{coords.lat}, {coords.lon}</p>
                 <p className="text-sm font-extralight">UTC: {timezone}</p>
             </div>
-        </>
-    ) : (
-        <Skeleton width={120} height={20} baseColor="#2b2f6e"        // gris oscuro
-            highlightColor="#734382" />
-    )
 
-
-    const tempNode = analytics ? (
-        <>
             <h1 className="text-6xl lg:text-8xl font-bold">
                 {Math.round(analytics.temp)}°C
                 <p className="text-base lg:text-base font-extralight text-center">feels like: {analytics.feelslike}°C</p>
-
             </h1>
-        </>
-    ) : (
-        <Skeleton width={180} height={96} baseColor="#2b2f6e"        // gris oscuro
-            highlightColor="#734382"   // gris más claro para animación
-            enableAnimation={true} />
-    );
 
-
-
-    const conditionNode = analytics ? (
-        <>
-            <div className="tracking-[.2rem] lg:tracking-[.8rem] text-lg lg:text-2xl backdrop-blur-3x flex flex-row items-center justify-center bg-white/5 p-2 rounded-full">
-                <p>{analytics.conditions}</p>
-                <FontAwesomeIcon icon={getIcon(condition)} ></FontAwesomeIcon>
+            <div className="flex gap-2 lg:gap-9 mt-4 items-center justify-center w-full">
+                <WeatherBox title="ICA">{analytics.aqius}</WeatherBox>
+                <WeatherBox title="RH">{analytics.humidity}%</WeatherBox>
+                <WeatherBox title="WS">{analytics.wind} km/h</WeatherBox>
             </div>
-            <p className="text-base lg:text-xs font-extralight text-center">{getPhrase(condition)}</p>
-        </>
-    ) : (
-        <Skeleton width={200} height={40} borderRadius={9999} baseColor="#2b2f6e"        // gris oscuro
-            highlightColor="#734382"
-            enableAnimation={true} />
-    );
 
-    const boxesNode = analytics ? (
-        <>
-            <WeatherBox title="ICA">{analytics.aqius}</WeatherBox>
-            <WeatherBox title="RH">{analytics.humidity}%</WeatherBox>
-            <WeatherBox title="WS">{analytics.wind} km/h</WeatherBox>
+            <div className="mt-4 w-[100%] flex justify-center itens-center">
+                <WeatherBox title="UV">{analytics.solarradiation}</WeatherBox>
+            </div>
+            <div className="flex items-center justify-center gap-2 w-[30%] text-center">
+                <FontAwesomeIcon size="1x" icon={faCircleInfo} className="text-4xl" />
+                <p className="text-xs font-extralight">This analytics was obtained from VisualCrossing.com at {analytics.datetime.split(" ")[1].split(":")[0]}:00 which may cause discrepancies with most up-to-date information.</p>
+            </div>
         </>
-    ) : (
-        <>
-            <Skeleton width={128} height={100} baseColor="#2b2f6e"        // gris oscuro
-                highlightColor="#734382"   // gris más claro para animación
-                enableAnimation={true} />
-            <Skeleton width={128} height={100} baseColor="#2b2f6e"        // gris oscuro
-                highlightColor="#734382"   // gris más claro para animación
-                enableAnimation={true} />
-            <Skeleton width={128} height={100} baseColor="#2b2f6e"        // gris oscuro
-                highlightColor="#734382"   // gris más claro para animación
-                enableAnimation={true} />
-        </>
-    );
-
-    const uvNode = analytics ? (
-        <WeatherBox title="UV">{analytics.solarradiation}</WeatherBox>
-    ) : (
-        <Skeleton width={128} height={100} baseColor="#2b2f6e"
-            highlightColor="#734382"
-            enableAnimation={true} />
-    );
+    )
 
 
     return (
         <div className="w-full h-[65vh] flex flex-col items-center justify-center text-white gap-4">
-
-            {coordsNode}
-
-            {tempNode}
-
-            {conditionNode}
-
-
-            <div className="flex gap-2 lg:gap-9 mt-4 items-center justify-center w-full">{boxesNode}</div>
-
-            <div className="mt-4 w-[100%] flex justify-center itens-center">{uvNode}</div>
+            {SkeletonNode}
         </div>
     );
 }
