@@ -84,7 +84,7 @@ const HourlyWeatherAnalytics = () => {
 
 
     return (
-        <div className="m-2 flex flex-col lg:flex-row items-center justify-center gap-5">
+        <div className="m-2 flex flex-col lg:flex-row items-center justify-center gap-5 w-full">
             {nextHours.length > 0 ? nextHours.map((h, idx) => (
                 <WeatherCard key={idx} {...h} />
             )) :

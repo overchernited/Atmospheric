@@ -7,8 +7,10 @@ const Forecast = () => {
         <>
 
             <PageBackground>
-                <MainWeatherAnalytics />
-                <HourlyWeatherAnalytics />
+                <div className="flex flex-col justify-center items-center gap-15">
+                    <MainWeatherAnalytics />
+                    <HourlyWeatherAnalytics />
+                </div>
             </PageBackground>
 
         </>
