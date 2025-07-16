@@ -89,10 +89,10 @@ const HourlyWeatherAnalytics = () => {
                 <WeatherCard key={idx} {...h} />
             )) :
                 <>
-                    <Skeleton height={300} className="w-full lg:w-[20%]" enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
-                    <Skeleton height={300} className="" enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
-                    <Skeleton height={300} className="" enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
-                    <Skeleton height={300} className="" enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
+                    <Skeleton height={300} width={200} enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
+                    <Skeleton height={300} width={200} enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
+                    <Skeleton height={300} width={200} enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
+                    <Skeleton height={300} width={200} enableAnimation={true} baseColor="#2b2f6e" highlightColor="#734382" />
                 </>
             }
         </div>

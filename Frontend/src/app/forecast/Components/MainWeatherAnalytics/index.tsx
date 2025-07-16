@@ -154,7 +154,7 @@ const MainWeatherAnalytics = () => {
         </>
     ) : (
         <>
-            <div className="text-center">
+            <div className="text-center z-[4000]">
                 <p className="text-base font-light">{coords.lat}, {coords.lon}</p>
                 <p className="text-sm font-extralight">UTC: {timezone}</p>
             </div>
