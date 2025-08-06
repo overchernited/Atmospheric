@@ -3,12 +3,12 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icon from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInputContext } from "@/hooks/InputContext/useContext";
 import { twMerge } from "tailwind-merge";
 
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     placeholder: string;
     icon: icon.IconDefinition;
     className?: string;
@@ -16,14 +16,24 @@ interface InputProps {
     value?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur: () => void;
-    inputAttributes?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 const CustomInput = (props: InputProps) => {
+    const { className, icon, name, value, placeholder, onChange, onBlur, ...rest } = props;
+
+
     const { values, setValue } = useInputContext();
     const [focus, setFocus] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    useEffect(() => {
+        if (value && value.length > 0) {
+            setFocus(true);
+        } else if (!inputRef.current?.matches(":focus")) {
+            // Solo baja label si no está enfocado
+            setFocus(false);
+        }
+    }, [value]);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(props.name, e.target.value); // Actualiza el contexto
         props.onChange(e); // Pasa el cambio a react-hook-form
@@ -55,8 +65,8 @@ const CustomInput = (props: InputProps) => {
                     setFocus(false);
                     props.onBlur();
                 }}
-                {...props.inputAttributes}
-                className={`${twMerge('shadow-lg rounded-full outline-0 m-2 p-4 pl-6 transition-all text-white duration-100 text-2xl w-full relative bg-[#141414] border-2', props.inputAttributes?.className, focus ? "border-[#7e4db2]" : "border-transparent")}`}
+                {...rest}
+                className={`${twMerge('shadow-lg rounded-full outline-0 m-2 p-4 pl-6 transition-all text-white duration-100 text-2xl w-full relative bg-[#141414] border-2', focus ? "border-[#7e4db2]" : "border-transparent")}`}
             />
         </motion.div>
     );

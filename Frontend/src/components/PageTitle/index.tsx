@@ -12,19 +12,19 @@ const PageTitle = () => {
     const pathname = usePathname();
     const [city, setCity] = useState<string | null>(null);
 
-    // Normaliza ruta
+
     const normalizePath = (p: string) => p.replace(/\/+$/, "") || "/";
     const currentPath = normalizePath(pathname);
 
     // Rutas especiales
-    const SIMPLE_ROUTES = ["/auth/login", "/auth/signup"];
-    const BLACKLIST_ROUTES = ["/", "/auth/login", "/auth/signup"];
+    const SIMPLE_ROUTES = ["/auth"];
+    const BLACKLIST_ROUTES = ["/"];
     const HOME_ROUTE = "/home";
-    const FORECAST_ROUTE = "/forecast";
+    const FORECAST_ROUTE = ["/dashboard/forecast", "/dashboard/fullforecast"];
 
     /** Obtener ciudad solo en /forecast */
     useEffect(() => {
-        if (currentPath !== FORECAST_ROUTE || city) return;
+        if (!FORECAST_ROUTE.includes(currentPath)) return;
 
         (async () => {
             try {
@@ -53,19 +53,19 @@ const PageTitle = () => {
 
     if (BLACKLIST_ROUTES.includes(currentPath)) return null;
 
-    if (SIMPLE_ROUTES.includes(currentPath)) {
+    if (SIMPLE_ROUTES.some(route => currentPath.startsWith(route))) {
         return (
             <Image
                 src={ContractionLogo}
                 alt="Logo"
                 priority
-                className="absolute top-0 right-0 mt-15 2xl:mt-20 w-[95vw] h-[3vh] md:w-[50vw] md:h-[6vh]"
+                className="lg:visible invisible absolute top-0 -translate-x-1/2 left-1/2 mt-5 h-[8rem] w-[42rem]"
             />
         );
     }
 
     const isHome = currentPath === HOME_ROUTE;
-    const isForecast = currentPath === FORECAST_ROUTE;
+    const isForecast = FORECAST_ROUTE.includes(currentPath);
 
     const defaultTitle =
         currentPath.split("/").filter(Boolean).pop()?.toUpperCase() || "ATMOSPH";

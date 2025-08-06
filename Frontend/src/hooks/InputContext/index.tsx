@@ -15,7 +15,7 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const setValue = (name: string, value: string) => {
         setValues((prev) => ({
             ...prev,
-            [name]: prev[name] !== undefined ? value : ""
+            [name]: value,
         }));
     };
 

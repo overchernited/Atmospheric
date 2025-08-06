@@ -29,6 +29,26 @@ export default function PageBackground({ children }: { children: ReactNode }) {
     const [bgImage, setBgImage] = useState<StaticImageData>(defaultBg);
     const pathname = usePathname();
 
+    const conditionBg: Record<string, StaticImageData> = {
+        rain: rainBg,
+        sunny: sunnyBg,
+        clear: defaultBg,
+        ...["cloudy", "overcast"].reduce((acc, key) => ({ ...acc, [key]: cloudyBg }), {}),
+    }
+
+
+    const getBg = (condition: string) => {
+        const lower = condition.toLowerCase();
+
+        for (const key in conditionBg) {
+            if (lower.includes(key)) {
+                return conditionBg[key];
+            }
+        }
+
+        return defaultBg;
+    }
+
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             const { clientX, clientY } = e;
@@ -46,7 +66,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
 
 
     useEffect(() => {
-        if (pathname !== '/forecast') return;
+        if (pathname !== '/dashboard/forecast') return;
         (async () => {
             try {
                 const pos = await new Promise<GeolocationPosition>((res, rej) =>
@@ -68,11 +88,7 @@ export default function PageBackground({ children }: { children: ReactNode }) {
 
                 setConditions(cond);
 
-                if (cond.includes("rain")) setBgImage(rainBg);
-                else if (cond.includes("cloud")) setBgImage(cloudyBg);
-                else if (cond.includes("sun")) setBgImage(sunnyBg);
-                else if (cond.includes("clear")) setBgImage(defaultBg);
-                else setBgImage(defaultBg);
+                setBgImage(getBg(cond))
             } catch {
                 setBgImage(defaultBg);            // fallback
             }
