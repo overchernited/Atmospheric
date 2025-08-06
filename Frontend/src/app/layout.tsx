@@ -1,20 +1,30 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Head from "next/head"; // <-- importar Head aquí
+import Head from "next/head";
+
 import "../styles/globals.css";
-import PageTitle from "@/components/PageTitle";
-import Navbar from "@/components/Navbar";
-import LayoutClientWrapper from "../hooks/NotFoundWrapper";
+
+
+//Components
+import ScrollToTop from "@/hooks/ScrollHook";
+import { NotificationProvider } from "@/components/Notifications/NotificationProvider";
+import NotificationList from "@/components/Notifications";
 import PagWrapper from "@/hooks/AnimationWrapper";
+import LayoutClientWrapper from "../hooks/NotFoundWrapper";
+
+//Libraries
 import 'react-loading-skeleton/dist/skeleton.css';
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from '@fortawesome/fontawesome-svg-core'
+config.autoAddCss = false
 
-import background from "../app/assets/background.webp"
-
+//Preload
 import bg1 from '../app/assets/background.webp';
 import bg2 from '../app/assets/raining.webp';
 import bg3 from '../app/assets/sunny.webp';
 import bg4 from '../app/assets/cloudy.webp';
-import ScrollToTop from "@/hooks/ScrollHook";
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,11 +56,14 @@ export default function RootLayout({
           <link rel="preload" as="image" href={bg4.src} type="image/webp" crossOrigin="anonymous" />
         </Head>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <PagWrapper>
-            <LayoutClientWrapper />
-            {children}
-          </PagWrapper>
-          <ScrollToTop />
+          <NotificationProvider>
+            <NotificationList />
+            <PagWrapper>
+              <LayoutClientWrapper />
+              {children}
+            </PagWrapper>
+            <ScrollToTop />
+          </NotificationProvider>
         </body>
       </html>
     </>
