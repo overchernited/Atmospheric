@@ -14,7 +14,8 @@ interface MemberCardProps {
 
 const MemberCard = (props: MemberCardProps) => {
     return (
-        <motion.div className="group h-[40rem] md:w-[27rem] md:h-[30rem] w-[24rem] bg-gradient-to-br from-[#251e2c] to-[#1b1b1b] rounded-xl relative"
+        <motion.div
+            className="group h-[40rem] md:w-[27rem] md:h-[30rem] w-[24rem] bg-gradient-to-br from-[#251e2c] to-[#1b1b1b] rounded-xl relative"
             whileHover={{ scale: 1.1, boxShadow: '0px 1px 50px #202020eb', zIndex: 100, y: -80, height: '40rem' }}>
             <div className="text-white flex items-center flex-col m-5 gap-1 border-b-1 p-1 border-[#7e4db2]">
                 <p className="text-4xl font-bold">{props.name}</p>

@@ -9,7 +9,7 @@ const DownloadButton = () => {
         <div className="flex flex-col lg:flex-row gap-5 items-center justify-center">
             <Btn
                 className="w-[60%] h-[60%] shrink-0 softhover"
-                style="positive"
+                btnStyle="positive"
                 onClick={() => {
                     alert("Descargando...");
                 }}
@@ -19,7 +19,7 @@ const DownloadButton = () => {
             </Btn>
             <Btn
                 className="w-[60%] h-[60%] shrink-0 softhover"
-                style="negative"
+                btnStyle="negative"
                 onClick={() => {
                     alert("Descargando...");
                 }}
