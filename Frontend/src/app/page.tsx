@@ -36,7 +36,7 @@ const LandingPage = () => {
                 <div className="flex flex-row gap-30 items-center justify-center">
                     <Link href="/home" className=" positive p-4 vibration softhover">Atmospheric
                     </Link>
-                    <Link href="/forecast" className=" positive p-4 vibration softhover">Forecast Demo
+                    <Link href="/dashboard/forecast" className=" positive p-4 vibration softhover">Forecast Demo
                     </Link>
                 </div>
             </section>

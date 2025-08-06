@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
         `?unitGroup=metric` +
         `&include=days,hours` +
         `&contentType=json` +
-        `&elements=datetime,temp,humidity,windspeed,aqius,solarradiation,conditions,feelslike` +
+        `&elements=datetime,temp,humidity,windspeed,aqius,uvindex,conditions,feelslike` +
         `&key=${API_KEY}`;
 
     const res = await fetch(url, { next: { revalidate: 600 } });

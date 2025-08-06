@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
         `?unitGroup=metric` +
         `&include=hours` +
         `&contentType=json` +
-        `&elements=datetime,temp,humidity,windspeed,aqius,solarradiation,conditions,feelslike` +
+        `&elements=datetime,temp,humidity,windspeed,aqius,uvindex,conditions,feelslike` +
         `&key=${API_KEY}`;
 
     const res = await fetch(url, { next: { revalidate: 600 } });
@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
         humidity: currentHour.humidity,
         windspeed: currentHour.windspeed,
         aqius: currentHour.aqius,
-        solarradiation: currentHour.solarradiation,
+        uvindex: currentHour.uvindex,
         feelslike: currentHour.feelslike,
         conditions: currentHour.conditions,
         currentHourNumber,
