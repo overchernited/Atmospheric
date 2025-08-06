@@ -3,11 +3,9 @@ import FiveDayForecast from "./Components/FiveDayForecast"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
-import DashboardLayout from "../dashboardLayout"
 
 const fullforecast = () => {
     return (
-        <DashboardLayout>
             <PageBackground>
                 <div className="gap-5 flex flex-col w-full h-[40rem] justify-center items-center my-5 p-2">
                     <FiveDayForecast />
@@ -17,7 +15,6 @@ const fullforecast = () => {
                     </Link>
                 </div>
             </PageBackground>
-        </DashboardLayout>
     )
 }
 
