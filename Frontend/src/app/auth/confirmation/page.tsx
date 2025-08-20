@@ -1,27 +1,30 @@
-// app/auth/confirmation/page.tsx
-"use client"
+"use client";
 
-import PageBackground from "@/hooks/Background"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { useSearchParams } from "next/navigation"
-import { useNotifications } from "@/components/Notifications/useNotification"
+import PageBackground from "@/hooks/Background";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import Link from "next/link"
-import { useEffect, Suspense } from "react"
-import { useRouter } from "next/navigation"
-
-const ConfirmationContent = () => {
+const Confirmation = () => {
     const searchParams = useSearchParams();
-    const email = searchParams.get('email');
-    const access_token = searchParams.get('access_token');
-    const router = useRouter()
+    const confirmLink = searchParams.get("confirmLink");
+
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     useEffect(() => {
-        if (access_token) {
-            router.push("/auth/login")
+        const hash = window.location.hash;
+        if (hash) {
+            const params = new URLSearchParams(hash.replace(/^#/, ""));
+            const error = params.get("error");
+            const description = params.get("error_description");
+
+            if (error) {
+                setErrorMessage(description || "This link is invalid or expired.");
+            }
         }
-    }, [access_token, router])
+    }, []);
 
     return (
         <PageBackground>
@@ -33,19 +36,22 @@ const ConfirmationContent = () => {
                         </Link>
                         <p className="font-bold text-left">Email sent</p>
                     </div>
-                    <p className="text-white font-normal text-center text-2xl mt-10 md:m-0">
-                        Check your email: <span className="font-semibold">{decodeURIComponent(email || "johndoe@gmail.com")}</span> and click the link we sent to follow the process!
-                    </p>
+
+                    <div className="text-white text-center mt-10">
+                        {errorMessage ? (
+                            <p>{errorMessage}</p>
+                        ) : confirmLink ? (
+                            <Link href={confirmLink} className="underline text-blue-400">
+                                Confirm your account
+                            </Link>
+                        ) : (
+                            <p>Loading...</p>
+                        )}
+                    </div>
                 </div>
             </div>
         </PageBackground>
-    )
-}
+    );
+};
 
-export default function ConfirmationPage() {
-    return (
-        <Suspense fallback={<div className="text-white text-center mt-10">Loading...</div>}>
-            <ConfirmationContent />
-        </Suspense>
-    )
-}
+export default Confirmation;

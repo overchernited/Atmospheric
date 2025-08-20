@@ -100,7 +100,7 @@ const UpdateForm = () => {
                     addNotification({
                         type: "error",
                         title: "Ouch! Something went wrong",
-                        description: "Password change failed",
+                        description: error.message,
                     });
                 } else {
                     console.log(data);

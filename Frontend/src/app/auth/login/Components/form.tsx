@@ -50,7 +50,7 @@ const LoginForm = () => {
             });
 
             const accessToken = data.session?.access_token;
-            document.cookie = `access_token=${accessToken}; path=/; max-age=86400;`;
+            document.cookie = `access_token=${accessToken}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 
             console.log(data)
 

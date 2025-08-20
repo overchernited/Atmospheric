@@ -39,7 +39,7 @@ const SignUpForm = () => {
                 email: data.email.trim().toLowerCase(),
                 password: data.password.trim(),
                 options: {
-                    emailRedirectTo: getURL(),
+                    emailRedirectTo: getURL() + "auth",
                     data: {
                         full_name: data.name.trim(),
                         avatar_url: `${process.env.NEXT_PUBLIC_PROFILESIMG_BUCKET}default.jpg`
@@ -47,7 +47,6 @@ const SignUpForm = () => {
                 },
             });
 
-            console.log(getURL() + "auth/confirmation")
 
             if (error) {
                 throw error;
@@ -62,7 +61,7 @@ const SignUpForm = () => {
 
 
             reset();
-            router.push(`/auth/confirmation`)
+            router.push(`/auth/emailsend?email=${encodeURIComponent(data.email)}&message=You have signed up successfully! to continue the process check your email:`);
         } catch (error: unknown) {
             let errorMessage = "Error signing up. Please try again.";
 

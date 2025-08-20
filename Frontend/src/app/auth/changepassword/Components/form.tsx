@@ -59,7 +59,7 @@ const UpdateForm = () => {
 
             await recoveryEmail(Email);
 
-            router.push(`/auth/confirmation?email=${encodeURIComponent(Email)}`);
+            router.push(`/auth/emailsend?email=${encodeURIComponent(Email)}&message=We%20have%20sent%20you%20an%20email%20to%20reset%20your%20password! check%20your%20email:`);
 
             reset();
         } catch (error) {
