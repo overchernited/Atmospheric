@@ -11,7 +11,7 @@ const Navbar = () => {
     const normalizePath = (p: string) => p.replace(/\/+$/, "") || "/";
     const currentPath = normalizePath(pathname);
 
-    const BLACKLIST_ROUTES = ["/auth/login", "/auth/signup", "/auth/confirmation", "/home"];
+    const BLACKLIST_ROUTES = ["/auth/login", "/auth/signup", "/auth/confirmation", "/auth"];
     const ISLANDING = "/"
 
     if (BLACKLIST_ROUTES.includes(currentPath)) return null;

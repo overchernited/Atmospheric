@@ -1,8 +1,8 @@
-import DownloadButton from "@/app/home/Components/DownloadButton";
+import DownloadButton from "@/app/page/DownloadButton";
 import logo from "../../public/branding/whitebrand.png"
-import LogoHeader from "@/app/home/Components/Header";
+import LogoHeader from "@/app/page/Header";
 import Link from 'next/link'
-import MemberCard from "@/app/home/Components/MemberCard";
+import MemberCard from "@/app/page/MemberCard";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFigma, faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -34,7 +34,7 @@ const LandingPage = () => {
                 </div>
                 <p className="text-white font-medium text-xl">or use our website</p>
                 <div className="flex flex-row gap-30 items-center justify-center">
-                    <Link href="/home" className=" positive p-4 vibration softhover">Atmospheric
+                    <Link href="/auth" className=" positive p-4 vibration softhover">Atmospheric
                     </Link>
                     <Link href="/dashboard/forecast" className=" positive p-4 vibration softhover">Forecast Demo
                     </Link>
