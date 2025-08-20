@@ -5,9 +5,9 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-const Confirmation = () => {
+const ConfirmationContent = () => {
     const searchParams = useSearchParams();
     const confirmLink = searchParams.get("confirmLink");
 
@@ -53,5 +53,11 @@ const Confirmation = () => {
         </PageBackground>
     );
 };
+
+const Confirmation = () => (
+    <Suspense fallback={<div className="text-white text-center">Loading...</div>}>
+        <ConfirmationContent />
+    </Suspense>
+);
 
 export default Confirmation;
