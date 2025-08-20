@@ -34,13 +34,13 @@ const SignUpForm = () => {
 
     const onSubmit = async (data: FormKeys) => {
         try {
-            console.log("Datos enviados:", data, getURL() + "auth");
+            console.log("Datos enviados:", data, `${getURL()}/auth`);
 
             const { error } = await supabase.auth.signUp({
                 email: data.email.trim().toLowerCase(),
                 password: data.password.trim(),
                 options: {
-                    emailRedirectTo: getURL() + "auth",
+                    emailRedirectTo: `${getURL()}/auth`,
                     data: {
                         full_name: data.name.trim(),
                         avatar_url: `${process.env.NEXT_PUBLIC_PROFILESIMG_BUCKET}default.jpg`
