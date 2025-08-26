@@ -46,7 +46,7 @@ const CustomInput = (props: InputProps) => {
             className={`${twMerge(" m-1 relative", props.className)}`}
         >
             <div
-                className={`select-none absolute top-[25%] left-8 bg-[#141414] px-4 rounded-full text-[#7e4db2] items-center transition-all flex flex-row gap-2 text-xl lg:text-3xl z-40 ${focus || (values[props.name] && values[props.name].length > 0)
+                className={`select-none absolute top-[25%] left-8 bg-[#141414] px-4 rounded-full text-[#7e4db2] items-center transition-all flex flex-row gap-2 text-xl lg:text-2xl z-40 ${focus || (values[props.name] && values[props.name].length > 0)
                     ? "-translate-y-[100%]"
                     : ""
                     }`}
