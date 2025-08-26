@@ -6,12 +6,14 @@ import supabase from "@/app/lib/supabase/client";
 import Skeleton from "react-loading-skeleton";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNotifications } from "@/components/Notifications/useNotification"
 import * as icons from "@fortawesome/free-solid-svg-icons";
 
 
 const UserImg = () => {
     const [user, setUser] = useState<any>(null);
     const [isUploading, setIsUploading] = useState(false);
+    const { addNotification } = useNotifications()
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
@@ -77,6 +79,12 @@ const UserImg = () => {
 
         console.log("Subiendo imagen:", file);
         if (error) {
+            addNotification({
+                type: "error",
+                title: "Ouch! Something went wrong",
+                description: error.message,
+
+            });
             console.error("Error uploading image:", error);
             setIsUploading(false)
             return;
@@ -112,6 +120,12 @@ const UserImg = () => {
             console.log("Metadatos actualizados");
             setIsUploading(false)
         }
+        addNotification({
+            type: "success",
+            title: "Yey! Image Updated",
+            description: "You have updated your image successfully!",
+
+        });
         setIsUploading(false)
     }
 
