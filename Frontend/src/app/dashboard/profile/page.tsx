@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import supabase from "@/app/lib/supabase/client";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faKey } from "@fortawesome/free-solid-svg-icons"
+import { faDoorOpen, faKey } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Btn from "@/components/Btn";
 import UserImg from "./Components/UserImg";
+import Skeleton from "react-loading-skeleton";
 
 const Profile = () => {
     const [user, setUser] = useState<any>(null);
@@ -36,7 +37,23 @@ const Profile = () => {
     }
 
     if (!user) {
-        return <p>Loading user...</p>;
+        return (
+            <div className="flex flex-col justify-center items-center gap-5">
+                <Skeleton width={200} height={200} baseColor="#2b2f6e"
+                    highlightColor="#734382"
+                    className=" rounded-full!"
+                    enableAnimation={true} />
+                <Skeleton width={400} height={80} baseColor="#2b2f6e"
+                    highlightColor="#734382"
+                    enableAnimation={true} />
+                <Skeleton width={128} height={40} baseColor="#2b2f6e"
+                    highlightColor="#734382"
+                    enableAnimation={true} />
+                <Skeleton width={128} height={40} baseColor="#2b2f6e"
+                    highlightColor="#734382"
+                    enableAnimation={true} />
+            </div>
+        )
     }
 
     const fullName = user.user_metadata?.full_name;
@@ -46,8 +63,8 @@ const Profile = () => {
             <UserImg />
             <p className="font-bold text-white text-4xl">{fullName}</p>
             <p className="font-medium text-white text-xl">{user.email}</p>
-            <Link className="p-2 negative vibration softhover text-sm w-[20%] !tracking-normal flex items-center justify-center gap-2" href="/auth/changepassword" >Change password <FontAwesomeIcon icon={faKey} /></Link>
-            <Btn btnStyle="negative" className="vibration softhover !tracking-normal" onClick={logout}>Logout</Btn>
+            <Link className="p-2 text-center negative vibration softhover text-sm w-[25%] !tracking-normal flex items-center justify-center gap-2" href="/auth/changepassword" >Change password <FontAwesomeIcon icon={faKey} /></Link>
+            <Btn btnStyle="negative" className="vibration softhover !tracking-normal flex items-center justify-center gap-2 text-center" onClick={logout}>Logout <FontAwesomeIcon icon={faDoorOpen} /></Btn>
         </div>
     );
 };
