@@ -51,6 +51,7 @@ const SignUpForm = () => {
 
             if (error) {
                 throw error;
+                return;
             }
 
             addNotification({
