@@ -10,6 +10,7 @@ import ScrollToTop from "@/hooks/ScrollHook";
 import { NotificationProvider } from "@/components/Notifications/NotificationProvider";
 import NotificationList from "@/components/Notifications";
 import PagWrapper from "@/hooks/AnimationWrapper";
+import Modal from "@/hooks/Modal";
 import LayoutClientWrapper from "../hooks/NotFoundWrapper";
 
 //Libraries
@@ -23,6 +24,7 @@ import bg1 from '../app/assets/background.webp';
 import bg2 from '../app/assets/raining.webp';
 import bg3 from '../app/assets/sunny.webp';
 import bg4 from '../app/assets/cloudy.webp';
+import { ModalProvider } from "@/hooks/Modal/modalProvider";
 
 
 
@@ -56,16 +58,19 @@ export default function RootLayout({
           <link rel="preload" as="image" href={bg4.src} type="image/webp" crossOrigin="anonymous" />
         </Head>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <NotificationProvider>
-            <NotificationList />
-            <PagWrapper>
-              <LayoutClientWrapper />
-              {children}
-            </PagWrapper>
-            <ScrollToTop />
-          </NotificationProvider>
+          <ModalProvider>
+            <NotificationProvider>
+              <NotificationList />
+              <Modal />
+              <PagWrapper>
+                <LayoutClientWrapper />
+                {children}
+              </PagWrapper>
+              <ScrollToTop />
+            </NotificationProvider>
+          </ModalProvider>
         </body>
-      </html>
+      </html >
     </>
   );
 }
