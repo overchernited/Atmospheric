@@ -82,3 +82,10 @@ body {
 .negative:hover {
   box-shadow: 1px 1px 20px #1414148f;
 }
+
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
