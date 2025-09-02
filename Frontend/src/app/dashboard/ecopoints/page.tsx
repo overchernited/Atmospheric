@@ -17,7 +17,7 @@ const EcoPointsPage = () => {
 
     return (
         <PageBackground>
-            <div className="flex flex-col justify-center items-center text-2xl h-[75%] w-full">
+            <div className="flex flex-col justify-center items-center text-2xl h-[80%] w-full">
                 <Map />
                 <button onClick={handleOpenLogin}>Login</button>
             </div>
