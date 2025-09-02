@@ -66,7 +66,7 @@ const CustomInput = (props: InputProps) => {
                     props.onBlur();
                 }}
                 {...rest}
-                className={`${twMerge('shadow-lg rounded-full outline-0 m-2 p-4 pl-6 transition-all text-white duration-100 text-2xl w-full relative bg-[#141414] border-2', focus ? "border-[#7e4db2]" : "border-transparent")}`}
+                className={`${twMerge('shadow-[#7e4db2] shadow-2xl rounded-full outline-0 m-2 p-4 pl-6 transition-all text-white duration-100 text-2xl w-full relative bg-[#141414] border-2', focus ? "border-[#7e4db2]" : "border-transparent")}`}
             />
         </motion.div>
     );
