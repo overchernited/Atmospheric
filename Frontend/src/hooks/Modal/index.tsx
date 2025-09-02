@@ -38,10 +38,10 @@ const Modal = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 200, opacity: 0 }}
             transition={{ duration: 0.4, type: "spring" }}
-            className="bg-[#141414] rounded-t-2xl relative h-75 w-[80%]  shadow-xl shadow-zinc-800"
+            className="bg-[#141414] rounded-t-2xl relative h-75 w-full md:w-[80%]  shadow-xl shadow-zinc-800"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-[#7e4db2] p-5 w-full text-4xl rounded-t-2xl flex justify-start items-center gap-5">
+            <div className="text-[#7e4db2] md:p-3 w-full text-4xl rounded-t-2xl flex justify-start items-center gap-5">
               <button className="btn vibration hardhover" onClick={() => closeModal()}><FontAwesomeIcon icon={faArrowLeft} /></button>
               <p className="font-bold">
                 {modalTitle}
