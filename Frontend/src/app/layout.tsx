@@ -52,6 +52,7 @@ export default function RootLayout({
     <>
       <html lang="en">
         <Head>
+          <link rel="manifest" href="/manifest.json" />
           <link rel="preload" as="image" href={bg1.src} type="image/webp" crossOrigin="anonymous" />
           <link rel="preload" as="image" href={bg2.src} type="image/webp" crossOrigin="anonymous" />
           <link rel="preload" as="image" href={bg3.src} type="image/webp" crossOrigin="anonymous" />
