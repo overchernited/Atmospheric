@@ -1,0 +1,9 @@
+{
+  "appId": "com.atmospheric.app",
+  "appName": "Atmospheric",
+  "webDir": "public",
+  "server": {
+    "url": "https://atmospheric.vercel.app",
+    "cleartext": false
+  }
+}
