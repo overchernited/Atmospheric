@@ -31,28 +31,30 @@ const Modal = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1 }}
-          className="fixed w-full h-full z-[1200] flex justify-center items-end"
+          className="fixed w-full h-full z-[10000] flex justify-center items-end"
         >
           <motion.div
             initial={{ y: 200, opacity: 0.1 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 200, opacity: 0 }}
             transition={{ duration: 0.4, type: "spring" }}
-            className="bg-[#141414] rounded-t-2xl relative h-75 w-full md:w-[80%]  shadow-xl shadow-zinc-800"
+            className="bg-[#141414] rounded-t-2xl relative h-85 w-full md:w-[80%]  shadow-xl shadow-zinc-800"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-[#7e4db2] md:p-3 w-full text-4xl rounded-t-2xl flex justify-start items-center gap-5">
-              <button className="btn vibration hardhover" onClick={() => closeModal()}><FontAwesomeIcon icon={faArrowLeft} /></button>
-              <p className="font-bold">
-                {modalTitle}
-              </p>
-            </div>
             <motion.div
-              className="p-2 h-full w-auto relative overflow-x-hidden overflow-y-auto"
-              animate={{ x: [-200, 0] }}
-              exit={{ x: [0, -200] }}
+              className="h-full w-full relative overflow-x-hidden overflow-y-auto"
+              animate={{ y: [-200, 0] }}
+              exit={{ y: [0, -200] }}
             >
-              {modalContent}
+              <div className="text-[#7e4db2] fixed z-[1200] bg-[#141414] m-2 text-4xl rounded-t-2xl flex justify-start items-center gap-5">
+                <button className="btn vibration hardhover" onClick={() => closeModal()}><FontAwesomeIcon icon={faArrowLeft} /></button>
+                <p className="font-bold">
+                  {modalTitle}
+                </p>
+              </div>
+              <div className="m-12">
+                {modalContent}
+              </div>
             </motion.div>
           </motion.div>
         </motion.div>
