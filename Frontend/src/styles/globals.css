@@ -89,3 +89,30 @@ body {
 .leaflet-control-attribution {
   filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
+
+/* Scrollbar global para toda la página */
+html {
+  scrollbar-width: auto; /* Firefox */
+  scrollbar-color: #7e4db2 transparent; /* thumb y track en Firefox */
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 35px; /* ancho de la scrollbar vertical */
+  height: 6px; /* alto de la scrollbar horizontal */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* fondo transparente */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7e4db2; /* color morado */
+  border-radius: 999px; /* redondeado */
+  border: 2px solid transparent; /* opcional: espacio alrededor */
+}
+
+/* Hover opcional para el thumb */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5a3890; /* morado más oscuro al pasar el mouse */
+}
