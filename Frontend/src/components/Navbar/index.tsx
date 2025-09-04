@@ -34,7 +34,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="bg-[#0c0c0c] fixed p-6 flex md:flex-col justify-between items-center bottom-0 md:bottom-1/2 md:translate-y-1/2 -translate-x-1/2 left-1/2 md:left-0 md:translate-x-0  m-2 md:m-5 rounded-2xl md:h-[40%] md:w-[3%] h-[8%] w-[80%] z-50">
+        <div className="bg-[#0c0c0c] fixed p-6 flex md:flex-col justify-between items-center bottom-0 md:bottom-1/2 md:translate-y-1/2 -translate-x-1/2 left-1/2 md:left-0 md:translate-x-0  m-2 md:m-5 rounded-2xl md:h-[40%] md:w-[3%] h-[8%] w-[80%] z-[5000]">
             {currentPath === ISLANDING ? (
                 landingButtons
             ) :
