@@ -9,7 +9,7 @@ import Btn from "@/components/Btn";
 import { useNotifications } from "@/components/Notifications/useNotification";
 import { Controller, useForm } from "react-hook-form";
 import supabase from "@/app/lib/supabase/client";
-import { point } from "leaflet";
+import { useRouter } from "next/navigation";
 
 interface Form {
     pointName: string;
@@ -22,6 +22,7 @@ interface Coords {
 }
 
 const AddPoint = () => {
+    const router = useRouter();
     const [coords, setCoords] = useState<Coords>({ lat: 0, lon: 0 });
     const [loading, setLoading] = useState(false); // 🔹 estado de carga
     const { addNotification } = useNotifications();
@@ -82,6 +83,8 @@ const AddPoint = () => {
                 description: `Point "${point_name}" has been added successfully.`,
             });
             reset(); // 🔹 limpia formulario
+            router.refresh()
+            router.push("/dashboard/ecopoints");
         }
     };
 
