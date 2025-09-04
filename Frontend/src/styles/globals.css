@@ -98,7 +98,7 @@ html {
 
 /* WebKit (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
-  width: 35px; /* ancho de la scrollbar vertical */
+  width: 16px; /* ancho de la scrollbar vertical */
   height: 6px; /* alto de la scrollbar horizontal */
 }
 

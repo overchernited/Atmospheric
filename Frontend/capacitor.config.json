@@ -3,7 +3,7 @@
   "appName": "Atmospheric",
   "webDir": "public",
   "server": {
-    "url": "https://atmospheric.vercel.app",
+    "url": "https://atmospheric-navy.vercel.app/dashboard/forecast",
     "cleartext": false
   }
 }

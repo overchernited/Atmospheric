@@ -46,7 +46,7 @@ const Modal = () => {
               animate={{ y: [-200, 0] }}
               exit={{ y: [0, -200] }}
             >
-              <div className="text-[#7e4db2] fixed z-[1200] bg-[#141414] m-2 text-4xl rounded-t-2xl flex justify-start items-center gap-5">
+              <div className="text-[#7e4db2] fixed z-[1200] bg-[#141414] text-4xl rounded-t-2xl flex justify-start items-center gap-5">
                 <button className="btn vibration hardhover" onClick={() => closeModal()}><FontAwesomeIcon icon={faArrowLeft} /></button>
                 <p className="font-bold">
                   {modalTitle}
