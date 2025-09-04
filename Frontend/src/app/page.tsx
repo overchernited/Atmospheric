@@ -57,28 +57,28 @@ const LandingPage = () => {
 
                 <section className="md:pl-10 md:p-5 md:text-2xl text-xl">
                     <p className="text-white font-bold text-3xl text-center">Features :)</p>
-                    <section className="flex justify-between md:text-2xl text-white font-bold m-10">
+                    <section className="flex flex-col md:flex-row justify-center md:justify-between md:text-2xl text-white font-bold m-10">
                         <Image src="/images/weather.png" alt="Atmospheric weather page" className="object-cover rounded-md" width={400} height={400} />
-                        <div className="w-[40%] ">
+                        <div className="w-full md:w-[40%]">
                             Check real-time weather updates with accurate data to plan your day without surprises.
                         </div>
                     </section>
-                    <section className="flex justify-between text-white font-bold m-10">
+                    <section className="flex  flex-col md:flex-row justify-center md:justify-between text-white font-bold m-10">
                         <Image src="/images/weather2.png" alt="Atmospheric weekly weather page" className="object-cover rounded-md" width={400} height={400} />
-                        <div className="w-[40%]">
+                        <div className="w-full md:w-[40%]">
                             Check real-time weather weekly updates with accurate data to plan your week without surprises.
                         </div>
                     </section>
-                    <section className="flex justify-between text-white font-bold m-10">
+                    <section className="flex  flex-col md:flex-row justify-center md:justify-between text-white font-bold m-10">
 
                         <Image src="/images/ecopoints.png" alt="Atmospheric ecologic points page" className="object-cover rounded-md" width={400} height={400} />
-                        <div className="w-[40%] ">
+                        <div className="w-full md:w-[40%] ">
                             Discover and review nearby ecological points, helping you actively contribute to environmental care.
                         </div>
                     </section>
-                    <section className="flex justify-between text-white font-bold m-10">
+                    <section className="flex  flex-col md:flex-row justify-center md:justify-between text-white font-bold m-10">
                         <Image src="/images/profiles.png" alt="Atmospheric profile page" className="object-cover rounded-md" width={400} height={400} />
-                        <div className="w-[40%] ">
+                        <div className="w-full md:w-[40%] ">
                             Customize your profile with preferences and settings to make the app perfectly suit your needs.
                         </div>
                     </section>
