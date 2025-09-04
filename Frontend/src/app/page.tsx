@@ -36,8 +36,6 @@ const LandingPage = () => {
                 <div className="flex flex-row gap-30 items-center justify-center">
                     <Link href="/auth" className=" positive p-4 vibration softhover">Atmospheric
                     </Link>
-                    <Link href="/dashboard/forecast" className=" positive p-4 vibration softhover">Forecast Demo
-                    </Link>
                 </div>
             </section>
 
@@ -60,30 +58,28 @@ const LandingPage = () => {
                 <section className="md:pl-10 md:p-5 md:text-2xl text-xl">
                     <p className="text-white font-bold text-3xl text-center">Features :)</p>
                     <section className="flex justify-between md:text-2xl text-white font-bold m-10">
+                        <Image src="/images/weather.png" alt="Atmospheric weather page" className="object-cover rounded-md" width={400} height={400} />
                         <div className="w-[40%] ">
                             Check real-time weather updates with accurate data to plan your day without surprises.
                         </div>
                     </section>
                     <section className="flex justify-between text-white font-bold m-10">
-                        <div>xd</div>
-                        <div className="w-[40%] ">
-                            Check real-time weather updates with accurate data to plan your day without surprises.
+                        <Image src="/images/weather2.png" alt="Atmospheric weekly weather page" className="object-cover rounded-md" width={400} height={400} />
+                        <div className="w-[40%]">
+                            Check real-time weather weekly updates with accurate data to plan your week without surprises.
                         </div>
                     </section>
                     <section className="flex justify-between text-white font-bold m-10">
+
+                        <Image src="/images/ecopoints.png" alt="Atmospheric ecologic points page" className="object-cover rounded-md" width={400} height={400} />
                         <div className="w-[40%] ">
                             Discover and review nearby ecological points, helping you actively contribute to environmental care.
                         </div>
                     </section>
                     <section className="flex justify-between text-white font-bold m-10">
-                        <div>xd</div>
+                        <Image src="/images/profiles.png" alt="Atmospheric profile page" className="object-cover rounded-md" width={400} height={400} />
                         <div className="w-[40%] ">
                             Customize your profile with preferences and settings to make the app perfectly suit your needs.
-                        </div>
-                    </section>
-                    <section className="flex justify-between text-2xl text-white font-bold m-10">
-                        <div className="w-[40%] ">
-                            Share ecological reports and data with other users to foster a community committed to the planet.
                         </div>
                     </section>
                 </section>
