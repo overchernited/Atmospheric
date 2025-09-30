@@ -2,30 +2,30 @@
 
 **Atmospheric** is a weather app with added-values focused in ecological solutions. 📱
 
-# TECHSTACK 📔
+# TechStack 📔
 
 NEXT.JS to create beautiful and reactive UI.
 TAILWIND to style Atmospheric.
 CAPACITOR to port Atmospheric App. 
 SUPABASE used as AaaS.
 
-# FEATURES
+# Features
 
-**REAL WEATHER DATA**
+**REAL WEATHER DATA**  
 The real weather data based on location, allow users to know different variety of stadistics in his area like: relative humidity, wind speed, solar radiation and air quality.
 
-**ECOPOINTS**
+**ECOPOINTS**  
 A section where the users can upload different variety of points: tech, organic and sanitaries.
 
-**USER**
+**USER**  
 Everyone can customize his profile avatar and name.
 
-**AUTH**
+**AUTH**  
 Robust solutions for secure users with password-recovery, confirmations emails, etc.
 
-# CLONING ATMOSPHERIC
+# Cloning Atmospheric  
 
-Get started by cloning Atmospheric repo in your machine and installing the dependencies:
+Get started by cloning Atmospheric repo in your machine and installing the dependencies:  
 
 ```bash
   git clone https://github.com/overchernited/Atmospheric/
@@ -33,7 +33,7 @@ Get started by cloning Atmospheric repo in your machine and installing the depen
   pnpm install .
 ```
 
-# DEVELOPING
+# Developing  
 
 ```
   pnpm run dev
