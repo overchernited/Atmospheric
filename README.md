@@ -2,12 +2,16 @@
 
 **Atmospheric** is a weather app with added-values focused in ecological solutions. 📱
 
+--
+
 # TechStack 📔
 
 **NEXT.JS** - to create beautiful and reactive UI.  
 **TAILWIND** - to style Atmospheric.  
 **CAPACITOR** - to port Atmospheric App.   
 **SUPABASE** - used as AaaS.  
+
+--
 
 # Features
 
@@ -23,6 +27,8 @@ Everyone can customize his profile avatar and name.
 **AUTH**  🗝️
 Robust solutions for secure users with password-recovery, confirmations emails, etc.
 
+--
+
 # Cloning Atmospheric  
 
 Get started by cloning Atmospheric repo in your machine and installing the dependencies:  
@@ -32,6 +38,7 @@ Get started by cloning Atmospheric repo in your machine and installing the depen
   cd Atmospheric
   pnpm install .
 ```
+--
 
 # Developing  
 
