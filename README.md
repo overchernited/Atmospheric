@@ -4,10 +4,10 @@
 
 # TechStack 📔
 
-**NEXT.JS** - to create beautiful and reactive UI.
-**TAILWIND** - to style Atmospheric.
-**CAPACITOR** - to port Atmospheric App. 
-**SUPABASE** - used as AaaS.
+**NEXT.JS** - to create beautiful and reactive UI.  
+**TAILWIND** - to style Atmospheric.  
+**CAPACITOR** - to port Atmospheric App.   
+**SUPABASE** - used as AaaS.  
 
 # Features
 
