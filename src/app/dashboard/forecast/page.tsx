@@ -16,6 +16,7 @@ const Forecast = () => {
             <PageBackground>
                 <div className="flex flex-col justify-center items-center gap-15">
                     <MainWeatherAnalytics />
+                    <Link href="/dashboard/recomendations" className="btn blurry !font-semibold !tracking-normal mt-4 shrink-0 hardhover lg:text-3xl md:text-2xl text-xl !rounded-md p-2 flex items-center justify-center gap-2">See Recomendations <FontAwesomeIcon icon={faArrowRight} /></Link>
                     <HourlyWeatherAnalytics />
                     <Link href="/dashboard/fullforecast" className="btn blurry !font-semibold !tracking-normal mb-20 shrink-0 hardhover lg:text-3xl md:text-2xl text-xl !rounded-md p-2 flex items-center justify-center gap-2">See more predictions <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
